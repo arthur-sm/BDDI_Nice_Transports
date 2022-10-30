@@ -55,7 +55,7 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
     Principais fluxos de informação/entidades do sistema: Relação entre Onibus e Ponto_de_Onibus, Passa, Relação entre Cliente e Ponto_de_Onibus, Abriga, e Relação entre Passageiro e Ônibus, Utiliza.
  
  
-![Alt text](https://github.com/discipbd1/trab01/blob/master/images/concept_sample.png?raw=true "Modelo Conceitual")
+![Alt text](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/images/NiceTransports_Conceitual.png?raw=true "Modelo Conceitual")
     
     
         
