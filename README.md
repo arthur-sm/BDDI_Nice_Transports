@@ -50,16 +50,12 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
     
     
 ### 5.MODELO CONCEITUAL<br>
-    A) Utilizar a Notação adequada (Preferencialmente utilizar o BR Modelo 3)
-    B) O mínimo de entidades do modelo conceitual pare este trabalho será igual a 3 e o Máximo 5.
-        * informe quais são as 3 principais entidades do sistema em densenvolvimento<br>(se houverem mais de 3 entidades, pense na importância da entidade para o sistema)       
-    C) Principais fluxos de informação/entidades do sistema (mínimo 3). <br>Dica: normalmente estes fluxos estão associados as tabelas que conterão maior quantidade de dados 
-    D) Qualidade e Clareza
-        Garantir que a semântica dos atributos seja clara no esquema (nomes coerentes com os dados).
-        Criar o esquema de forma a garantir a redução de informação redundante, possibilidade de valores null, 
-        e tuplas falsas (Aplicar os conceitos de normalização abordados).   
+    As entidades aplicadas no modelo conceitual foram: Onibus, Ponto_de_Onibus, Cliente, Linha e Endereco.<br>
+    As principais entidades do sistema em densenvolvimento são: Onibus, Passageiro e Ponto_de_Onibus.<br>
+    Principais fluxos de informação/entidades do sistema: Relação entre Onibus e Ponto_de_Onibus, Passa, Relação entre Cliente e Ponto_de_Onibus, Abriga, e Relação entre Passageiro e Ônibus, Utiliza.
+ 
         
-![Alt text](https://github.com/discipbd1/trab01/blob/master/images/concept_sample.png?raw=true "Modelo Conceitual")
+![Alt text](images/NiceTransports_Conceitual.pnghttps://github.com/discipbd1/trab01/blob/master/images/concept_sample.png?raw=true "Modelo Conceitual")
     
     
         
@@ -69,12 +65,30 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
     [Grupo02]: [Nomes dos que participaram na avaliação]
 
 #### 5.2 Descrição dos dados 
-    [objeto]: [descrição do objeto]
-    
-    EXEMPLO:
-    CLIENTE: Tabela que armazena as informações relativas ao cliente<br>
-    CPF: campo que armazena o número de Cadastro de Pessoa Física para cada cliente da empresa.<br>
+    [objeto]: [Onibus]
+    Onibus: Tabela que armazena as informações relativas ao tipo de veículo de transporte utilizado pela impresa para locomoção de seus clientes.<br>
+    Placa: Campo com placa atual de cada veículo.<br>
+    Max_Passageiros_Sentados: Campo que mostra quantidade de assentos disponpiveis no ônibus.<br>
+    Data_Compra: Campo apontando data (Dia/Mês/Ano) de compra do ônibus.<br>
 
+    [objeto]: [Ponto_de_Onibus]
+    Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.<br>
+    EhTerminal: Campo que define se o ponto de ônibus é considerado um Terminal (1) ou Não (0)
+
+    [objeto]: [Cliente]
+    Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.<br>
+
+    [objeto]: [Linha]
+    Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.<br>
+    Nome: Campo que define o nome da Linha de Ônibus<br>
+    Data_Criacao: Campo que aponta data de criação da Linha<br>
+
+    [objeto]: [Endereco]
+    Endereco: Tabela com um conjunto de dados que ajudam a definir a localização de um ponto de ônibus.<br>
+    Cidade: Campo contendo uma das cidades da Grande Vitória.<br>
+    Bairro: Campo que descreve um bairro específico da cidade.<br>
+    Tipo_Via_Urbana: Campo que aponta se a via descrita é uma Rua ou Avenida<br> 
+    Nome_Via_Urbana: Campo que mostra nome de uma Via Urbana localizada no bairro<br>
 
 ### 6	MODELO LÓGICO<br>
         a) inclusão do esquema lógico do banco de dados
