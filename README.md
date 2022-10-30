@@ -54,8 +54,8 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
     As principais entidades do sistema em densenvolvimento são: Onibus, Passageiro e Ponto_de_Onibus.<br>
     Principais fluxos de informação/entidades do sistema: Relação entre Onibus e Ponto_de_Onibus, Passa, Relação entre Cliente e Ponto_de_Onibus, Abriga, e Relação entre Passageiro e Ônibus, Utiliza.
  
-        
-![Alt text](images/NiceTransports_Conceitual.pnghttps://github.com/discipbd1/trab01/blob/master/images/concept_sample.png?raw=true "Modelo Conceitual")
+ 
+![Alt text](https://github.com/discipbd1/trab01/blob/master/images/concept_sample.png?raw=true "Modelo Conceitual")
     
     
         
