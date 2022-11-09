@@ -73,10 +73,10 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
 
     [objeto]: [Ponto_de_Onibus]
     Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.<br>
-    EhTerminal: Campo que define se o ponto de ônibus é considerado um Terminal (1) ou Não (0)
-
+    
     [objeto]: [Cliente]
     Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.<br>
+    Hashcode: Campo com codificação (base x64) de imagem onde houve primeira detecção do cliente
 
     [objeto]: [Linha]
     Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.<br>
