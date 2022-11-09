@@ -13,7 +13,7 @@ Clara_Maestri:claramaestri.11@gmail.com<br>
 Este documento contém a especificação do projeto do banco de dados <nome do projeto> 
 <br>e motivação da escolha realizada. <br>
 
-> A empresa "Devcom Projetos" visa colaborar com desenvolvimento de projetos para uma sociedade melhor. Sabendo-se dos desafios para gerenciar projetos dentro de uma empresa e visando unir as informações relativas a funcionários, departamentos e projetos em um mesmo local, ficamos motivados com o desenvolvimento deste sistema. O Sistema "Devcom" tem como objetivo gerenciar todas as informações ao desenvolvimento das atividades de projetos em diversas localidades do país. Para realizar suas operações adequadamente e empresa necessita que sistema que armazene informações relativas aos Projetos, Departamentos e Empregados, além de também armazenar dados sobre  Dependentes e Históricos de Salário dos empregados. O sistema deverá gerar um conjunto de relatórios que por sua vez atenderá os anseios da empresa em questão.
+> A empresa de transporte público "Nice Transports" tem como objetivo oferecer conforto e acessibilidade aos passageiros dos ônibus. Dito isso, um dos maiores desafios para o alcance das premissas da empresa definitivamente é a superlotação, sendo necessário o desenvolvimento e implementação de um sistema para mitigar esse problema. A motivação para desenvolvermos o sistema é a proximidade deste com nossa realidade, já que utilizamos diretamente o transporte rodoviário público, sendo extremamente benéfico para nós e o restante da população em geral utilizar da tecnologia para tornar a locomoção cotidiana mais fácil e confortável para todos. O sistema da "Nice Transports" prevê um gerenciamento da acessibilidade, ocupação e lotação dos ônibus, seja esta de assentos ou de passageiros em pé, além de um controle e manutenção dos veículos de cada linha. Para isso, será necessário armazenar informações sobre o percurso das linhas, número de passageiros presentes (em pé e em assentos), viagens, pontos de parada e utilização dos veículos. O pagamento da passagem na roleta estará diretamente ligado ao registro de passageiros. Também deverão ser gerados relatórios sobre os dados recebidos, os quais serão tratados pelos analistas e gerentes. 
  
 
 ### 3.MINI-MUNDO<br>
@@ -73,10 +73,10 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
 
     [objeto]: [Ponto_de_Onibus]
     Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.<br>
-    
+    EhTerminal: Campo que define se o ponto de ônibus é considerado um Terminal (1) ou Não (0)
+
     [objeto]: [Cliente]
     Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.<br>
-    Hashcode: Campo com codificação (base x64) de imagem onde houve primeira detecção do cliente
 
     [objeto]: [Linha]
     Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.<br>
