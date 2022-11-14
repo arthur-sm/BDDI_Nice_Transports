@@ -30,8 +30,13 @@ Sugestão: https://balsamiq.com/products/mockups/<br>
 ![Arquivo PDF do Protótipo Balsamiq feito para Empresa Devcom](https://github.com/discipbd1/trab01/blob/master/arquivos/EmpresaDevcom.pdf?raw=true "Empresa Devcom")
 #### 4.2 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
     a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? 
+O sistema proposto poderá fornecer relatórios e informações relacionadas à estrutura dos veículos utilizados (ex: necessidade de manutenção), a ocupação dos assentos e a lotação geral dos ônibus, as viagens realizadas, rotas e linhas. 
     b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
-    
+    - Relatório sobre horários com maior lotação;
+    - Relatórios sobre condições e manutenção dos veículos;
+    - Relatórios sobre linhas mais utilizadas pelos passageiros;
+    - Relatórios sobre linhas que mais necessitam manutenção dos veículos;
+    - Relatórios sobre a quantidade de linhas que atendem cada rota;
 > A Empresa DevCom precisa inicialmente dos seguintes relatórios:
 * Relatório que mostre o nome de cada supervisor(a) e a quantidade de empregados supervisionados.
 * Relatório relativo aos os supervisores e supervisionados. O resultado deve conter o nome do supervisor e nome do supervisionado além da quantidade total de horas que cada supervisionado tem alocada aos projetos existentes na empresa.
