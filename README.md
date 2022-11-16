@@ -64,21 +64,21 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
     
 #### 5.1 Validação do Modelo Conceitual
     [Grupo01]: [Clara Maestri] Modelo conceitual compreensível, considero as cardinalidades aceitáveis para a proposta e as palavras utilizadas no modelo conferem bom entendimento. No geral, atende a ideia do sistema. 
-    [Grupo02]: [Nomes dos que participaram na avaliação]
 
 #### 5.2 Descrição dos dados 
     [objeto]: [Onibus]
     Onibus: Tabela que armazena as informações relativas ao tipo de veículo de transporte utilizado pela impresa para locomoção de seus clientes.<br>
     Placa: Campo com placa atual de cada veículo.<br>
-    Max_Passageiros_Sentados: Campo que mostra quantidade de assentos disponpiveis no ônibus.<br>
+    Qntd_Assentos: Campo que mostra quantidade de assentos disponpiveis no ônibus.<br>
     Data_Compra: Campo apontando data (Dia/Mês/Ano) de compra do ônibus.<br>
 
     [objeto]: [Ponto_de_Onibus]
     Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.<br>
-    EhTerminal: Campo que define se o ponto de ônibus é considerado um Terminal (1) ou Não (0)
+    Qntd_Assentos
 
     [objeto]: [Cliente]
     Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.<br>
+    Hashcode: Código de imagem onde foi reconhecido um cliente pela primeira vez durante um trajeto.<br>
 
     [objeto]: [Linha]
     Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.<br>
@@ -93,15 +93,135 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
     Nome_Via_Urbana: Campo que mostra nome de uma Via Urbana localizada no bairro<br>
 
 ### 6	MODELO LÓGICO<br>
-        a) inclusão do esquema lógico do banco de dados
-        b) verificação de correspondencia com o modelo conceitual 
-        (não serão aceitos modelos que não estejam em conformidade)
+![Alt text](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/images/NiceTransports_Logico.png?raw=true "Modelo Logico")
 
 ### 7	MODELO FÍSICO<br>
-        a) inclusão das instruções de criacão das estruturas em SQL/DDL 
-        (criação de tabelas, alterações, etc..) 
-        
-       
+    /* NiceTransports_Logico: */
+
+    CREATE TABLE Onibus (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        Placa VARCHAR,
+        Qntd_Assentos INTEGER,
+        Data_Compra DATE
+    );
+    CREATE TABLE Linha (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        Campo VARCHAR,
+        Data_Criacao DATE
+    );
+    CREATE TABLE Alocado (
+        fk_Onibus_ID SERIAL,
+        fk_Linha_ID SERIAL,
+        dataHora TIMESTAMP
+    );
+    CREATE TABLE Ponto_de_Onibus (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        fk_Endereco_ID SERIAL,
+        Numero INTEGER,
+        Qntd_Assentos INTEGER
+    );
+    CREATE TABLE Percorre (
+        ID SERIAL PRIMARY KEY,
+        fk_Linha_ID SERIAL,
+        fk_Ponto_de_Onibus_ID SERIAL,
+        Ordem INTEGER,
+        Ativo BIT
+    );
+    CREATE TABLE Endereco (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        Cidade VARCHAR,
+        Bairro VARCHAR,
+        Tipo_Via_Urbana VARCHAR,
+        Nome_Via_Urbana VARCHAR
+    );
+    CREATE TABLE Passa (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        fk_Onibus_ID SERIAL,
+        fk_Ponto_de_Onibus_ID SERIAL,
+        dataHora TIMESTAMP
+    );
+    CREATE TABLE Cliente (
+        ID SERIAL PRIMARY KEY,
+        Hashcode VARCHAR,
+        UNIQUE (Hashcode, ID)
+    );
+    CREATE TABLE Entrega (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        fk_Onibus_ID SERIAL,
+        fk_Cliente_ID SERIAL,
+        dataHora TIMESTAMP
+    );
+    CREATE TABLE Recebe (
+        ID SERIAL PRIMARY KEY UNIQUE,
+        fk_Onibus_ID INTEGER,
+        fk_Cliente_ID INTEGER,
+        dataHora TIMESTAMP
+    );
+    CREATE TABLE Chega (
+        ID INTEGER PRIMARY KEY UNIQUE,
+        fk_Cliente_ID SERIAL,
+        fk_Ponto_de_Onibus_ID SERIAL,
+        dataHora TIMESTAMP
+    );
+    CREATE TABLE Deixa (
+        ID INTEGER PRIMARY KEY UNIQUE,
+        fk_Cliente_ID INTEGER,
+        fk_Ponto_de_Onibus_ID INTEGER,
+        dataHora TIMESTAMP
+    );
+    ALTER TABLE Linha ADD CONSTRAINT FK_Linha_3
+        FOREIGN KEY (fk_Onibus_ID)
+        REFERENCES Onibus (ID);
+    ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_1
+        FOREIGN KEY (fk_Onibus_ID)
+        REFERENCES Onibus (ID);
+    ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_2
+        FOREIGN KEY (fk_Linha_ID)
+        REFERENCES Linha (ID);
+    ALTER TABLE Ponto_de_Onibus ADD CONSTRAINT FK_Ponto_de_Onibus_3
+        FOREIGN KEY (fk_Endereco_ID)
+        REFERENCES Endereco (ID);
+    ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_2
+        FOREIGN KEY (fk_Linha_ID)
+        REFERENCES Linha (ID);
+    ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_3
+        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
+        REFERENCES Ponto_de_Onibus (ID);
+    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_1
+        FOREIGN KEY (fk_Percorre_Campo)
+        REFERENCES Percorre (ID);
+    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_2
+        FOREIGN KEY (fk_Onibus_ID)
+        REFERENCES Onibus (ID);
+    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_5
+        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
+        REFERENCES Ponto_de_Onibus (ID);
+    ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_1
+        FOREIGN KEY (fk_Onibus_ID)
+        REFERENCES Onibus (ID);
+    ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_2
+        FOREIGN KEY (fk_Cliente_ID)
+        REFERENCES Cliente (ID);
+    ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_1
+        FOREIGN KEY (fk_Onibus_ID)
+        REFERENCES Onibus (ID);
+    ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_2
+        FOREIGN KEY (fk_Cliente_ID)
+        REFERENCES Cliente (ID);
+    ALTER TABLE Chega ADD CONSTRAINT FK_Chega_2
+        FOREIGN KEY (fk_Cliente_ID)
+        REFERENCES Cliente (ID);
+    ALTER TABLE Chega ADD CONSTRAINT FK_Chega_3
+        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
+        REFERENCES Ponto_de_Onibus (ID);
+    ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_2
+        FOREIGN KEY (fk_Cliente_ID)
+        REFERENCES Cliente (ID);
+    ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_3
+        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
+        REFERENCES Onibus (ID); 
+
+
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
         a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico
         (Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
@@ -112,9 +232,10 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
     OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
+
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
 
-># Marco de Entrega 01: Do item 1 até o item 9.1<br>
+# Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
