@@ -63,7 +63,7 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
         
     
 #### 5.1 Validação do Modelo Conceitual
-    [Grupo01]: [Nomes dos que participaram na avaliação]
+    [Grupo01]: [Clara Maestri] Modelo conceitual compreensível, considero as cardinalidades aceitáveis para a proposta e as palavras utilizadas no modelo conferem bom entendimento. No geral, atende a ideia do sistema. 
     [Grupo02]: [Nomes dos que participaram na avaliação]
 
 #### 5.2 Descrição dos dados 
