@@ -22,39 +22,33 @@ Este documento contém a especificação do projeto do banco de dados <nome do p
 
 ### 4.PROTOTIPAÇÃO, PERGUNTAS A SEREM RESPONDIDAS E TABELA DE DADOS<br>
 #### 4.1 RASCUNHOS BÁSICOS DA INTERFACE (MOCKUPS)<br>
-Neste ponto a codificação não e necessária, somente as ideias de telas devem ser criadas, o princípio aqui é pensar na criação da interface para identificar possíveis informações a serem armazenadas ou descartadas <br>
 
-Sugestão: https://balsamiq.com/products/mockups/<br>
+Arquivo PDF do Protótipo Balsamiq feito para Empresa Nice Transports("Empresa Nice Transports")
 
-![Alt text](https://github.com/discipbd1/trab01/blob/master/balsamiq.png?raw=true "Title")
-![Arquivo PDF do Protótipo Balsamiq feito para Empresa Devcom](https://github.com/discipbd1/trab01/blob/master/arquivos/EmpresaDevcom.pdf?raw=true "Empresa Devcom")
 #### 4.2 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
-   a) O sistema proposto poderá fornecer quais tipos de relatórios e informaçes? 
+   a) O sistema proposto poderá fornecer quais tipos de relatórios e informações? 
  
-O sistema proposto poderá fornecer relatórios e informações relacionadas à estrutura dos veículos utilizados (ex: necessidade de manutenção), a ocupação dos assentos e a lotação geral dos ônibus, as viagens realizadas, rotas e linhas. 
+O sistema proposto tem com foco fornecer  informações relacionadas à quantidade de passageiros a cada instante, tempo de espera e duração dos trajetos. O sistema também será capaz de apontar data de aquisição dos veículos, localização de cada ponto de ônibus e percurso de cada linha, bem como quais ônibus estão alocados em cada uma.
     
  b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
     
     - Relatório sobre horários com maior lotação;
-    - Relatórios sobre condições e manutenção dos veículos;
+    - Relatórios sobre tempo médio de espera por ônibus em cada Bairro/Cidade;
     - Relatórios sobre linhas mais utilizadas pelos passageiros;
-    - Relatórios sobre linhas que mais necessitam manutenção dos veículos;
-    - Relatórios sobre a quantidade de linhas que atendem cada rota;
+    - Relatórios sobre quantidade de pontos por Cidade/Bairro;
+    - Relatórios sobre a quantidade de linhas que atendem cada ponto;
 
 
  
  
 #### 4.3 TABELA DE DADOS DO SISTEMA:
-    a) Esta tabela deve conter todos os atributos do sistema e um mínimo de 10 linhas/registros de dados.
-    b) Esta tabela tem a intenção de simular um relatório com todos os dados que serão armazenados 
-    
-![Exemplo de Tabela de dados da Empresa Devcom](https://github.com/discipbd1/trab01/blob/master/arquivos/TabelaEmpresaDevCom_sample.xlsx?raw=true "Tabela - Empresa Devcom")
+![Tabela de dados da Empresa Nice Transports](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/arquivos/4.3_Tabelas%20de%20Dados%20do%20Sistema.ods?raw=true "Tabela - Empresa Nice Transports")
     
     
 ### 5.MODELO CONCEITUAL<br>
-    As entidades aplicadas no modelo conceitual foram: Onibus, Ponto_de_Onibus, Cliente, Linha e Endereco.<br>
-    As principais entidades do sistema em densenvolvimento são: Onibus, Passageiro e Ponto_de_Onibus.<br>
-    Principais fluxos de informação/entidades do sistema: Relação entre Onibus e Ponto_de_Onibus, Passa, Relação entre Cliente e Ponto_de_Onibus, Abriga, e Relação entre Passageiro e Ônibus, Utiliza.
+    As entidades aplicadas no modelo conceitual foram: Onibus, Ponto_de_Onibus, Cliente, Linha e Endereco.
+    As principais entidades do sistema em densenvolvimento são: Onibus, Passageiro e Ponto_de_Onibus.
+    Principais fluxos de informação/entidades do sistema: Relação entre Onibus e Ponto_de_Onibus, Passa, Relações entre Cliente e Ponto_de_Onibus, Sai e Entra, e Relações entre Passageiro e Ônibus, Recebe e Entrega.
  
  
 ![Alt text](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/images/NiceTransports_Conceitual.png?raw=true "Modelo Conceitual")
@@ -73,22 +67,22 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
     Data_Compra: Campo apontando data (Dia/Mês/Ano) de compra do ônibus.<br>
 
     [objeto]: [Ponto_de_Onibus]
-    Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.<br>
-    Qntd_Assentos
+    Ponto_de_Onibus: Tabela com informações sobre os locais onde os ônibus devem parar para embarque/desembarque, de acordo com solicitado pelos clientes.
+    Qntd_Assentos: Quantidade de assentos disponíveis naquele ponto de ônibus.
 
     [objeto]: [Cliente]
-    Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.<br>
-    Hashcode: Código de imagem onde foi reconhecido um cliente pela primeira vez durante um trajeto.<br>
+    Cliente: Tabela com ID de uma pessoa que deseja utilizar (no caso de estar em um ponto de ônibus) ou está utilizando (no caso de estar em um ônibus) o serviço da empresa. O sistema é capaz de identificar indivíduos e distinguir elas.
+    Hashcode: Link da imagem onde foi reconhecido um cliente pela primeira vez durante um trajeto.
 
     [objeto]: [Linha]
-    Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.<br>
-    Nome: Campo que define o nome da Linha de Ônibus<br>
-    Data_Criacao: Campo que aponta data de criação da Linha<br>
+    Linha: Tabela com informações sobre um conjunto de ônibus que seguem uma rota de Pontos de Ônibus específica.
+    Nome: Campo que define o nome da Linha de Ônibus.
+    Data_Criacao: Campo que aponta data de criação da Linha.
 
     [objeto]: [Endereco]
     Endereco: Tabela com um conjunto de dados que ajudam a definir a localização de um ponto de ônibus.<br>
-    Cidade: Campo contendo uma das cidades da Grande Vitória.<br>
-    Bairro: Campo que descreve um bairro específico da cidade.<br>
+    Cidade: Campo contendo uma das cidades da Grande Vitória.
+    Bairro: Campo que descreve um bairro específico da cidade.
     Tipo_Via_Urbana: Campo que aponta se a via descrita é uma Rua ou Avenida<br> 
     Nome_Via_Urbana: Campo que mostra nome de uma Via Urbana localizada no bairro<br>
 
@@ -96,131 +90,7 @@ O sistema proposto poderá fornecer relatórios e informações relacionadas à 
 ![Alt text](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/images/NiceTransports_Logico.png?raw=true "Modelo Logico")
 
 ### 7	MODELO FÍSICO<br>
-    /* NiceTransports_Logico: */
-
-    CREATE TABLE Onibus (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        Placa VARCHAR,
-        Qntd_Assentos INTEGER,
-        Data_Compra DATE
-    );
-    CREATE TABLE Linha (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        Campo VARCHAR,
-        Data_Criacao DATE
-    );
-    CREATE TABLE Alocado (
-        fk_Onibus_ID SERIAL,
-        fk_Linha_ID SERIAL,
-        dataHora TIMESTAMP
-    );
-    CREATE TABLE Ponto_de_Onibus (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        fk_Endereco_ID SERIAL,
-        Numero INTEGER,
-        Qntd_Assentos INTEGER
-    );
-    CREATE TABLE Percorre (
-        ID SERIAL PRIMARY KEY,
-        fk_Linha_ID SERIAL,
-        fk_Ponto_de_Onibus_ID SERIAL,
-        Ordem INTEGER,
-        Ativo BIT
-    );
-    CREATE TABLE Endereco (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        Cidade VARCHAR,
-        Bairro VARCHAR,
-        Tipo_Via_Urbana VARCHAR,
-        Nome_Via_Urbana VARCHAR
-    );
-    CREATE TABLE Passa (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        fk_Onibus_ID SERIAL,
-        fk_Ponto_de_Onibus_ID SERIAL,
-        dataHora TIMESTAMP
-    );
-    CREATE TABLE Cliente (
-        ID SERIAL PRIMARY KEY,
-        Hashcode VARCHAR,
-        UNIQUE (Hashcode, ID)
-    );
-    CREATE TABLE Entrega (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        fk_Onibus_ID SERIAL,
-        fk_Cliente_ID SERIAL,
-        dataHora TIMESTAMP
-    );
-    CREATE TABLE Recebe (
-        ID SERIAL PRIMARY KEY UNIQUE,
-        fk_Onibus_ID INTEGER,
-        fk_Cliente_ID INTEGER,
-        dataHora TIMESTAMP
-    );
-    CREATE TABLE Chega (
-        ID INTEGER PRIMARY KEY UNIQUE,
-        fk_Cliente_ID SERIAL,
-        fk_Ponto_de_Onibus_ID SERIAL,
-        dataHora TIMESTAMP
-    );
-    CREATE TABLE Deixa (
-        ID INTEGER PRIMARY KEY UNIQUE,
-        fk_Cliente_ID INTEGER,
-        fk_Ponto_de_Onibus_ID INTEGER,
-        dataHora TIMESTAMP
-    );
-    ALTER TABLE Linha ADD CONSTRAINT FK_Linha_3
-        FOREIGN KEY (fk_Onibus_ID)
-        REFERENCES Onibus (ID);
-    ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_1
-        FOREIGN KEY (fk_Onibus_ID)
-        REFERENCES Onibus (ID);
-    ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_2
-        FOREIGN KEY (fk_Linha_ID)
-        REFERENCES Linha (ID);
-    ALTER TABLE Ponto_de_Onibus ADD CONSTRAINT FK_Ponto_de_Onibus_3
-        FOREIGN KEY (fk_Endereco_ID)
-        REFERENCES Endereco (ID);
-    ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_2
-        FOREIGN KEY (fk_Linha_ID)
-        REFERENCES Linha (ID);
-    ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_3
-        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
-        REFERENCES Ponto_de_Onibus (ID);
-    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_1
-        FOREIGN KEY (fk_Percorre_Campo)
-        REFERENCES Percorre (ID);
-    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_2
-        FOREIGN KEY (fk_Onibus_ID)
-        REFERENCES Onibus (ID);
-    ALTER TABLE Passa ADD CONSTRAINT FK_Passa_5
-        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
-        REFERENCES Ponto_de_Onibus (ID);
-    ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_1
-        FOREIGN KEY (fk_Onibus_ID)
-        REFERENCES Onibus (ID);
-    ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_2
-        FOREIGN KEY (fk_Cliente_ID)
-        REFERENCES Cliente (ID);
-    ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_1
-        FOREIGN KEY (fk_Onibus_ID)
-        REFERENCES Onibus (ID);
-    ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_2
-        FOREIGN KEY (fk_Cliente_ID)
-        REFERENCES Cliente (ID);
-    ALTER TABLE Chega ADD CONSTRAINT FK_Chega_2
-        FOREIGN KEY (fk_Cliente_ID)
-        REFERENCES Cliente (ID);
-    ALTER TABLE Chega ADD CONSTRAINT FK_Chega_3
-        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
-        REFERENCES Ponto_de_Onibus (ID);
-    ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_2
-        FOREIGN KEY (fk_Cliente_ID)
-        REFERENCES Cliente (ID);
-    ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_3
-        FOREIGN KEY (fk_Ponto_de_Onibus_ID)
-        REFERENCES Onibus (ID); 
-
+![Script do modelo físico das tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/modelo_fisico.sql "Modelo Físico - Nice Transports")
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
         a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico
