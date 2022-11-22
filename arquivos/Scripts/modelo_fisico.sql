@@ -13,6 +13,8 @@ CREATE TABLE Linha (
     Data_Criacao DATE
 );
 
+alter table Linha RENAME COLUMN Campo TO Nome
+
 CREATE TABLE Alocado (
     fk_Onibus_ID SERIAL,
     fk_Linha_ID SERIAL,
@@ -83,70 +85,62 @@ CREATE TABLE Deixa (
     dataHora TIMESTAMP
 );
  
-ALTER TABLE Linha ADD CONSTRAINT FK_Linha_3
+ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_Onibus_ID
     FOREIGN KEY (fk_Onibus_ID)
     REFERENCES Onibus (ID);
  
-ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_1
-    FOREIGN KEY (fk_Onibus_ID)
-    REFERENCES Onibus (ID);
- 
-ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_2
+ALTER TABLE Alocado ADD CONSTRAINT FK_Alocado_Linha_ID
     FOREIGN KEY (fk_Linha_ID)
     REFERENCES Linha (ID);
  
-ALTER TABLE Ponto_de_Onibus ADD CONSTRAINT FK_Ponto_de_Onibus_3
+ALTER TABLE Ponto_de_Onibus ADD CONSTRAINT FK_Ponto_de_Onibus_Endereco_ID
     FOREIGN KEY (fk_Endereco_ID)
     REFERENCES Endereco (ID);
  
-ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_2
+ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_Linha_ID
     FOREIGN KEY (fk_Linha_ID)
     REFERENCES Linha (ID);
  
-ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_3
+ALTER TABLE Percorre ADD CONSTRAINT FK_Percorre_Ponto_de_Onibus_ID
     FOREIGN KEY (fk_Ponto_de_Onibus_ID)
     REFERENCES Ponto_de_Onibus (ID);
  
-ALTER TABLE Passa ADD CONSTRAINT FK_Passa_1
-    FOREIGN KEY (fk_Percorre_Campo)
-    REFERENCES Percorre (ID);
- 
-ALTER TABLE Passa ADD CONSTRAINT FK_Passa_2
+ALTER TABLE Passa ADD CONSTRAINT FK_Passa_Onibus_ID
     FOREIGN KEY (fk_Onibus_ID)
     REFERENCES Onibus (ID);
  
-ALTER TABLE Passa ADD CONSTRAINT FK_Passa_5
+ALTER TABLE Passa ADD CONSTRAINT FK_Passa_Ponto_de_Onibus_ID
     FOREIGN KEY (fk_Ponto_de_Onibus_ID)
     REFERENCES Ponto_de_Onibus (ID);
  
-ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_1
+ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_Onibus_ID
     FOREIGN KEY (fk_Onibus_ID)
     REFERENCES Onibus (ID);
  
-ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_2
+ALTER TABLE Entrega ADD CONSTRAINT FK_Entrega_Cliente_ID
     FOREIGN KEY (fk_Cliente_ID)
     REFERENCES Cliente (ID);
  
-ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_1
+ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_Onibus_ID
     FOREIGN KEY (fk_Onibus_ID)
     REFERENCES Onibus (ID);
  
-ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_2
+ALTER TABLE Recebe ADD CONSTRAINT FK_Recebe_Cliente_ID
     FOREIGN KEY (fk_Cliente_ID)
     REFERENCES Cliente (ID);
  
-ALTER TABLE Chega ADD CONSTRAINT FK_Chega_2
+ALTER TABLE Chega ADD CONSTRAINT FK_Chega_Cliente_ID
     FOREIGN KEY (fk_Cliente_ID)
     REFERENCES Cliente (ID);
  
-ALTER TABLE Chega ADD CONSTRAINT FK_Chega_3
+ALTER TABLE Chega ADD CONSTRAINT FK_Chega_Ponto_de_Onibus_ID
     FOREIGN KEY (fk_Ponto_de_Onibus_ID)
     REFERENCES Ponto_de_Onibus (ID);
  
-ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_2
+ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_ClienteID
     FOREIGN KEY (fk_Cliente_ID)
     REFERENCES Cliente (ID);
  
-ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_3
+ALTER TABLE Deixa ADD CONSTRAINT FK_Deixa_Ponto_de_Onibus_ID
     FOREIGN KEY (fk_Ponto_de_Onibus_ID)
     REFERENCES Onibus (ID);
