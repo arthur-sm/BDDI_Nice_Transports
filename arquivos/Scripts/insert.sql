@@ -73,11 +73,6 @@ insert into Alocado (fk_onibus_id, fk_linha_id, datahora) values
 (9,9,'2022-01-01 10:56:32'),
 (10,10,'2022-01-01 15:57:04')
 
-ALTER TABLE percorre
-drop COLUMN ativo 
-alter table percorre
-ADD COLUMN  ativo boolean
-
 insert into Percorre (fk_linha_id, fk_ponto_de_onibus_id, ordem, ativo) values
 (1, 1, 1, 't'),
 (2, 2, 5, 'f'),
