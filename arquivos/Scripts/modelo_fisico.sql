@@ -33,7 +33,7 @@ CREATE TABLE Percorre (
     fk_Linha_ID SERIAL,
     fk_Ponto_de_Onibus_ID SERIAL,
     Ordem INTEGER,
-    Ativo BIT
+    Ativo BOOLEAN
 );
 
 CREATE TABLE Endereco (
