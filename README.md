@@ -26,11 +26,11 @@ Este documento contém a especificação do projeto do banco de dados <nome do p
 Arquivo PDF do Protótipo Balsamiq feito para Empresa Nice Transports("Empresa Nice Transports")
 
 #### 4.2 QUAIS PERGUNTAS PODEM SER RESPONDIDAS COM O SISTEMA PROPOSTO?
-   a) O sistema proposto poderá fornecer quais tipos de relatórios e informações? 
+ **a) O sistema proposto poderá fornecer quais tipos de relatórios e informações?** 
  
 O sistema proposto tem com foco fornecer  informações relacionadas à quantidade de passageiros a cada instante, tempo de espera e duração dos trajetos. O sistema também será capaz de apontar data de aquisição dos veículos, localização de cada ponto de ônibus e percurso de cada linha, bem como quais ônibus estão alocados em cada uma.
     
- b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!
+ **b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!**
     
     - Relatório sobre horários com maior lotação;
     - Relatórios sobre tempo médio de espera por ônibus em cada Bairro/Cidade;
@@ -109,7 +109,9 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     join ponto_de_onibus p on p.id = c.fk_ponto_de_onibus_id
     join endereco e on e.id = p.fk_endereco_id
     group by e.cidade
-![resultado da consulta 1](../../../../../../C:/Users/ArthurSantos/Documents/GitHub/BDDI_Nice_Transports/images/Consultas/media_espera_cidade.png "Tempo médio de espera de ônibus por cidade")
+
+![resultado da consulta 1](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/images/Consultas/media_espera_cidade.png "Tempo médio de espera de ônibus por cidade")
+
     --top 5 Linhas mais utilizadas pelos clientes: linha, alocado e recebe
     select l.nome, count(r.*) from linha l
     join alocado a on a.fk_linha_id = l.id
@@ -117,7 +119,8 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     group by l.nome
     order by count(r.*) desc
     fetch first 5 rows only
-![resultado da consulta 2](../../../../../../C:/Users/ArthurSantos/Documents/GitHub/BDDI_Nice_Transports/images/Consultas/top5_linhas_utilizadas.png "top 5 Linhas mais utilizadas pelos clientes")
+
+![resultado da consulta 2](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/images/Consultas/top5_linhas_utilizadas.png "top 5 Linhas mais utilizadas pelos clientes")
 
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
     select * from public.onibus;
