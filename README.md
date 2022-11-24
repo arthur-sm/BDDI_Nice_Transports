@@ -98,12 +98,40 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
         b) Criar um novo banco de dados para testar a restauracao 
         (em caso de falha na restauração o grupo não pontuará neste quesito)
         c) formato .SQL
-
+        ![Script de insert nas tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/insert.sql "Script de insert nas tabelas - Nice Transports")
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-    OBS: Incluir para cada tópico as instruções SQL + imagens (print da tela) mostrando os resultados.<br>
+    Tabelas: "onibus", "linha", "percorre", "alocado", "endereco", "ponto_de_onibus", "passa", "entrega", "cliente", "recebe", "chega" e "deixa"
+    Principais consultas:
+    --Tempo médio de espera de ônibus por cidade (tabelas: chega, deixa, ponto_de_onibus e endereco)
+    select e.cidade, avg(d.datahora - c.datahora) from chega c
+    join deixa d on d.fk_cliente_id = c.fk_cliente_id
+    join ponto_de_onibus p on p.id = c.fk_ponto_de_onibus_id
+    join endereco e on e.id = p.fk_endereco_id
+    group by e.cidade
+![resultado da consulta 1](../../../../../../C:/Users/ArthurSantos/Documents/GitHub/BDDI_Nice_Transports/images/Consultas/media_espera_cidade.png "Tempo médio de espera de ônibus por cidade")
+    --top 5 Linhas mais utilizadas pelos clientes: linha, alocado e recebe
+    select l.nome, count(r.*) from linha l
+    join alocado a on a.fk_linha_id = l.id
+    join recebe r on r.fk_onibus_id = a.fk_onibus_id
+    group by l.nome
+    order by count(r.*) desc
+    fetch first 5 rows only
+![resultado da consulta 2](../../../../../../C:/Users/ArthurSantos/Documents/GitHub/BDDI_Nice_Transports/images/Consultas/top5_linhas_utilizadas.png "top 5 Linhas mais utilizadas pelos clientes")
 
 #### 9.1	CONSULTAS DAS TABELAS COM TODOS OS DADOS INSERIDOS (Todas) <br>
+    select * from public.onibus;
+    select * from public.linha;
+    select * from public.percorre;
+    select * from public.alocado;
+    select * from public.endereco;
+    select * from public.ponto_de_onibus;
+    select * from public.passa;
+    select * from public.entrega;
+    select * from public.cliente;
+    select * from public.recebe;
+    select * from public.chega;
+    select * from public.deixa;
 
 # Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
