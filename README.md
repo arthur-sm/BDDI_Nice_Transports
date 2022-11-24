@@ -42,7 +42,7 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
  
  
 #### 4.3 TABELA DE DADOS DO SISTEMA:
-![Tabela de dados da Empresa Nice Transports](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/arquivos/4.3_Tabelas%20de%20Dados%20do%20Sistema.ods?raw=true "Tabela - Empresa Nice Transports")
+[Tabela de dados da Empresa Nice Transports](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/arquivos/4.3_Tabelas%20de%20Dados%20do%20Sistema.ods?raw=true)
     
     
 ### 5.MODELO CONCEITUAL<br>
@@ -90,7 +90,7 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 ![Alt text](https://github.com/arthur-sm/BDDI_Nice_Transports/blob/master/images/NiceTransports_Logico.png?raw=true "Modelo Logico")
 
 ### 7	MODELO FÍSICO<br>
-![Script do modelo físico das tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/modelo_fisico.sql "Modelo Físico - Nice Transports")
+[Script do modelo físico das tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/modelo_fisico.sql "Modelo Físico - Nice Transports")
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
         a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico

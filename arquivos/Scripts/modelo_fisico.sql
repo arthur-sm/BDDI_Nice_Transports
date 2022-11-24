@@ -1,69 +1,77 @@
-/* NiceTransports_Logico: */
+/* NiceTransports_Logico*/
 
+DROP TABLE IF EXISTS Onibus;
 CREATE TABLE Onibus (
     ID SERIAL PRIMARY KEY UNIQUE,
-    Placa VARCHAR,
+    Placa VARCHAR(15),
     Qntd_Assentos INTEGER,
     Data_Compra DATE
 );
 
+DROP TABLE IF EXISTS Linha;
 CREATE TABLE Linha (
     ID SERIAL PRIMARY KEY UNIQUE,
-    Campo VARCHAR,
+    Nome VARCHAR(10),
     Data_Criacao DATE
 );
 
-alter table Linha RENAME COLUMN Campo TO Nome
-
+DROP TABLE IF EXISTS Alocado;
 CREATE TABLE Alocado (
-    fk_Onibus_ID SERIAL,
-    fk_Linha_ID SERIAL,
+    fk_Onibus_ID INTEGER,
+    fk_Linha_ID INTEGER,
     dataHora TIMESTAMP
 );
 
+DROP TABLE IF EXISTS Ponto_de_Onibus;
 CREATE TABLE Ponto_de_Onibus (
     ID SERIAL PRIMARY KEY UNIQUE,
-    fk_Endereco_ID SERIAL,
+    fk_Endereco_ID INTEGER,
     Numero INTEGER,
     Qntd_Assentos INTEGER
 );
 
+DROP TABLE IF EXISTS Percorre;
 CREATE TABLE Percorre (
     ID SERIAL PRIMARY KEY,
-    fk_Linha_ID SERIAL,
-    fk_Ponto_de_Onibus_ID SERIAL,
+    fk_Linha_ID INTEGER,
+    fk_Ponto_de_Onibus_ID INTEGER,
     Ordem INTEGER,
     Ativo BOOLEAN
 );
 
+DROP TABLE IF EXISTS Endereco;
 CREATE TABLE Endereco (
     ID SERIAL PRIMARY KEY UNIQUE,
-    Cidade VARCHAR,
-    Bairro VARCHAR,
-    Tipo_Via_Urbana VARCHAR,
-    Nome_Via_Urbana VARCHAR
+    Cidade VARCHAR(20),
+    Bairro VARCHAR(30),
+    Tipo_Via_Urbana VARCHAR(10),
+    Nome_Via_Urbana VARCHAR(30)
 );
 
+DROP TABLE IF EXISTS Passa;
 CREATE TABLE Passa (
     ID SERIAL PRIMARY KEY UNIQUE,
-    fk_Onibus_ID SERIAL,
-    fk_Ponto_de_Onibus_ID SERIAL,
+    fk_Onibus_ID INTEGER,
+    fk_Ponto_de_Onibus_ID INTEGER,
     dataHora TIMESTAMP
 );
 
+DROP TABLE IF EXISTS Cliente;
 CREATE TABLE Cliente (
     ID SERIAL PRIMARY KEY,
-    Hashcode VARCHAR,
+    Hashcode VARCHAR(512),
     UNIQUE (Hashcode, ID)
 );
 
+DROP TABLE IF EXISTS Entrega;
 CREATE TABLE Entrega (
     ID SERIAL PRIMARY KEY UNIQUE,
-    fk_Onibus_ID SERIAL,
-    fk_Cliente_ID SERIAL,
+    fk_Onibus_ID INTEGER,
+    fk_Cliente_ID INTEGER,
     dataHora TIMESTAMP
 );
 
+DROP TABLE IF EXISTS Recebe;
 CREATE TABLE Recebe (
     ID SERIAL PRIMARY KEY UNIQUE,
     fk_Onibus_ID INTEGER,
@@ -71,15 +79,17 @@ CREATE TABLE Recebe (
     dataHora TIMESTAMP
 );
 
+DROP TABLE IF EXISTS Chega;
 CREATE TABLE Chega (
-    ID INTEGER PRIMARY KEY UNIQUE,
-    fk_Cliente_ID SERIAL,
-    fk_Ponto_de_Onibus_ID SERIAL,
+    ID SERIAL PRIMARY KEY UNIQUE,
+    fk_Cliente_ID INTEGER,
+    fk_Ponto_de_Onibus_ID INTEGER,
     dataHora TIMESTAMP
 );
 
+DROP TABLE IF EXISTS Deixa;
 CREATE TABLE Deixa (
-    ID INTEGER PRIMARY KEY UNIQUE,
+    ID SERIAL PRIMARY KEY UNIQUE,
     fk_Cliente_ID INTEGER,
     fk_Ponto_de_Onibus_ID INTEGER,
     dataHora TIMESTAMP
