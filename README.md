@@ -141,6 +141,11 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
+            select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
+            select * from onibus where qntd_assentos > 40 or data_compra = '2015-07-09'; 
+            select * from ponto_de_onibus where numero > 20 and qntd_assentos > 10;
+            select * from percorre where not ativo = false;
+            select * from endereco where not tipo_via_urbana = 'Rua';
     b) Criar no mínimo 3 consultas com operadores aritméticos 
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
 
