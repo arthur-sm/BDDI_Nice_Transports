@@ -139,6 +139,10 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 # Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
+      select * from onibus where qntd_assentos < 40;
+      select * from endereco where cidade = 'Serra';
+      select * from percorre where ativo = false;
+      select * from ponto_de_onibus where qntd_assentos < 12;
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
             select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
