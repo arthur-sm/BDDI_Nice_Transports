@@ -139,14 +139,15 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 # Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
-      select * from onibus where qntd_assentos < 40;
-      
+     -- seleciona os ônibus com menor quantidade de assentos na tabela
+     select * from onibus where qntd_assentos < 40;
+   -- seleciona com endereço na serra
       select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
       join endereco e on e.id = p.fk_endereco_id 
       where e.cidade = 'Serra'
-      
+      -- seleciona linhas inativas
       select * from percorre where ativo = false;
-      
+      -- seleciona pontos de ônibus com menos assentos
       select * from ponto_de_onibus where qntd_assentos < 12;
 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
@@ -167,9 +168,13 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
             join deixa d on d.fk_cliente_id = c.fk_cliente_id
             group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
-
+             alter table chega rename column datahora to datahora_chegada;
+             alter table cliente rename column link_imagem to link_hashcode;
+             alter table deixa rename column datahora to datahora_deixa;
+             
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
+          select * from linha where nome like '%8';
     b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
