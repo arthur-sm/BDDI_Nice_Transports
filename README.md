@@ -167,6 +167,18 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
             join deixa d on d.fk_cliente_id = c.fk_cliente_id
             group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
+            --Alter no nome da coluna 'Numero' para que fique mais claro qual a info presente no campo
+            ALTER TABLE ponto_de_onibus
+            RENAME COLUMN Numero TO Numero_Endereco
+            --Alter no nome da coluna 'Hashcode' devido a alteração no conteúdo alocado do campo
+            ALTER TABLE cliente
+            RENAME COLUMN Hashcode TO Link_Imagem
+            --Alter no nome da coluna 'tipo_via_urbana' para uma opção mais simples e apropriada
+            Alter Table Endereco
+            RENAME COLUMN tipo_via_urbana TO Logradouro
+            --Alter no nome da coluna 'nome_via_urbana' para algo mais simples e apropriado 
+            Alter Table Endereco
+            RENAME COLUMN nome_via_urbana to Nome
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
