@@ -195,7 +195,27 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
+      -- conta a quantidade de ônibus por quantidade de assentos 
+        select count(placa) as qtd_onibus, qntd_assentos  from onibus group by qntd_assentos; 
+       -- conta quantas linhas foram criadas em cada data
+        select count(nome) as qtd_linhas, data_criacao from linha group by data_criacao;
+       -- conta quantas entregas em cada data/hora
+        select count(id) as qtd_entregas, datahora from entrega group by datahora;
+       -- conta quantos endereços por logradouro 
+       select count(id) as qtd_enderecos, logradouro from endereco group by logradouro;
+      -- conta quantos endereços por cidade 
+       select count(id) as qtd_enderecos, cidade from endereco group by cidade;
     a) Criar minimo 2 envolvendo algum tipo de junção
+         select id as id_bus, placa from onibus inner join alocado
+         on (onibus.id = alocado.fk_onibus_id)
+         group by id;
+         
+       select bairro from endereco inner join ponto_de_onibus 
+          on (endereco.id = ponto_de_onibus.fk_endereco_id)
+          where logradouro = 'Rua'
+          group by bairro ;
+
+
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
     a) Criar minimo 1 de cada tipo
