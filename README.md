@@ -219,6 +219,9 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
     a) Criar minimo 1 de cada tipo
+     select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
+     on (linha.id = percorre.fk_linha_id)
+     group by data_criacao;
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
