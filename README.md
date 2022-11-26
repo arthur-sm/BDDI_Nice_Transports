@@ -174,7 +174,16 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
              
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
-          select * from linha where nome like '%8';
+         --seleciona placas cujo nome termina com 8
+         select * from linha where nome like '%8'; 
+         -- seleciona endereços no qual o nome da via começa com a letra a
+         select * from endereco where nome ilike 'a%';
+         -- seleciona bairros com "jardim" no nome (jardim camburi, jardim da penha, jardim américa.. etc.)
+         select * from endereco where bairro ilike 'jARDiM%';
+         -- selecion ônibus com placa inciando com a letra k 
+         select * from onibus where placa ilike 'k%';
+         -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
+         select * from endereco where cidade ilike 'v%';
     b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
