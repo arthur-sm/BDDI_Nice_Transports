@@ -140,9 +140,15 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
       select * from onibus where qntd_assentos < 40;
-      select * from endereco where cidade = 'Serra';
+      
+      select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
+      join endereco e on e.id = p.fk_endereco_id 
+      where e.cidade = 'Serra'
+      
       select * from percorre where ativo = false;
+      
       select * from ponto_de_onibus where qntd_assentos < 12;
+
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
     a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
             select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
@@ -150,7 +156,16 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
             select * from ponto_de_onibus where numero > 20 and qntd_assentos > 10;
             select * from percorre where not ativo = false;
             select * from endereco where not tipo_via_urbana = 'Rua';
-    b) Criar no mínimo 3 consultas com operadores aritméticos 
+    b) Criar no mínimo 3 consultas com operadores aritméticos
+            --Ônibus próximos de precisarem serem aposentados (15 anos de serviço)
+            SELECT id, placa, data_compra FROM onibus
+            where data_compra < now() - INTERVAL '14 year';
+            --Capacidade máxima de cada ônibus (pessoas em pé + sentadas)
+            SELECT id, placa, (qntd_assentos + 16) capacidade_maxia FROM Onibus
+            --Tempo médio de espera por dia
+            SELECT to_char(c.datahora, 'dd-MM-yyyy'), avg(d.datahora - c.datahora) from chega c
+            join deixa d on d.fk_cliente_id = c.fk_cliente_id
+            group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
     c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
