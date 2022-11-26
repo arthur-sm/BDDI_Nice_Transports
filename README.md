@@ -222,6 +222,19 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
      select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
      on (linha.id = percorre.fk_linha_id)
      group by data_criacao;
+ 
+     select count(numero_endereco) as qtd_pontos, qntd_assentos from ponto_de_onibus full join endereco 
+     on (ponto_de_onibus.fk_endereco_id = endereco.id)
+     group by qntd_assentos;
+ 
+    select count(fk_cliente_id) as qtd_clientes, datahora from recebe right join cliente 
+    on (recebe.fk_cliente_id = cliente.id)
+    group by datahora;
+ 
+   select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
+   on (chega.fk_cliente_id = cliente.id)
+   group by datahora_chegada;
+
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
