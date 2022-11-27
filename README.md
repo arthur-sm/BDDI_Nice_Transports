@@ -93,16 +93,16 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 [Script do modelo físico das tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/modelo_fisico.sql "Modelo Físico - Nice Transports")
 
 ### 8	INSERT APLICADO NAS TABELAS DO BANCO DE DADOS<br>
-        a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico
-        (Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
-        b) Criar um novo banco de dados para testar a restauracao 
-        (em caso de falha na restauração o grupo não pontuará neste quesito)
-        c) formato .SQL
-        ![Script de insert nas tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/insert.sql "Script de insert nas tabelas - Nice Transports")
+    a) inclusão das instruções de inserção dos dados nas tabelas criadas pelo script de modelo físico
+    (Drop para exclusão de tabelas + create definição de para tabelas e estruturas de dados + insert para dados a serem inseridos)
+    b) Criar um novo banco de dados para testar a restauracao 
+    (em caso de falha na restauração o grupo não pontuará neste quesito)
+    c) formato .SQL
+[Script de insert nas tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/insert.sql "Script de insert nas tabelas - Nice Transports")
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-    Tabelas: "onibus", "linha", "percorre", "alocado", "endereco", "ponto_de_onibus", "passa", "entrega", "cliente", "recebe", "chega" e "deixa"
-    Principais consultas:
+Tabelas: "onibus", "linha", "percorre", "alocado", "endereco", "ponto_de_onibus", "passa", "entrega", "cliente", "recebe", "chega" e "deixa"
+Principais consultas:
     --Tempo médio de espera de ônibus por cidade (tabelas: chega, deixa, ponto_de_onibus e endereco)
     select e.cidade, avg(d.datahora - c.datahora) from chega c
     join deixa d on d.fk_cliente_id = c.fk_cliente_id
@@ -139,103 +139,117 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 # Marco de Entrega 01: Do item 1 até o item 9.1<br>
 
 #### 9.2	CONSULTAS DAS TABELAS COM FILTROS WHERE (Mínimo 4)<br>
-     -- seleciona os ônibus com menor quantidade de assentos na tabela
-     select * from onibus where qntd_assentos < 40;
-   -- seleciona com endereço na serra
-      select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
-      join endereco e on e.id = p.fk_endereco_id 
-      where e.cidade = 'Serra'
-      -- seleciona linhas inativas
-      select * from percorre where ativo = false;
-      -- seleciona pontos de ônibus com menos assentos
-      select * from ponto_de_onibus where qntd_assentos < 12;
+    -- seleciona os ônibus com menor quantidade de assentos na tabela
+    select * from onibus where qntd_assentos < 40;
+    -- seleciona com endereço na serra
+    select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
+    join endereco e on e.id = p.fk_endereco_id 
+    where e.cidade = 'Serra'
+    -- seleciona linhas inativas
+    select * from percorre where ativo = false;
+    -- seleciona pontos de ônibus com menos assentos
+    select * from ponto_de_onibus where qntd_assentos < 12;
 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-    a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
-            select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
-            select * from onibus where qntd_assentos > 40 or data_compra = '2015-07-09'; 
-            select * from ponto_de_onibus where numero > 20 and qntd_assentos > 10;
-            select * from percorre where not ativo = false;
-            select * from endereco where not tipo_via_urbana = 'Rua';
-    b) Criar no mínimo 3 consultas com operadores aritméticos
-            --Ônibus próximos de precisarem serem aposentados (15 anos de serviço)
-            SELECT id, placa, data_compra FROM onibus
-            where data_compra < now() - INTERVAL '14 year';
-            --Capacidade máxima de cada ônibus (pessoas em pé + sentadas)
-            SELECT id, placa, (qntd_assentos + 16) capacidade_maxia FROM Onibus
-            --Tempo médio de espera por dia
-            SELECT to_char(c.datahora, 'dd-MM-yyyy'), avg(d.datahora - c.datahora) from chega c
-            join deixa d on d.fk_cliente_id = c.fk_cliente_id
-            group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
-    c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
-            --Alter no nome da coluna 'Numero' para que fique mais claro qual a info presente no campo
-            ALTER TABLE ponto_de_onibus
-            RENAME COLUMN Numero TO Numero_Endereco
-            --Alter no nome da coluna 'Hashcode' devido a alteração no conteúdo alocado do campo
-            ALTER TABLE cliente
-            RENAME COLUMN Hashcode TO Link_Imagem
-            --Alter no nome da coluna 'tipo_via_urbana' para uma opção mais simples e apropriada
-            Alter Table Endereco
-            RENAME COLUMN tipo_via_urbana TO Logradouro
-            --Alter no nome da coluna 'nome_via_urbana' para algo mais simples e apropriado 
-            Alter Table Endereco
-            RENAME COLUMN nome_via_urbana to Nome
-            
+a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
+
+    select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
+    select * from onibus where qntd_assentos > 40 or data_compra = '2015-07-09'; 
+    select * from ponto_de_onibus where numero > 20 and qntd_assentos > 10;
+    select * from percorre where not ativo = false;
+    select * from endereco where not tipo_via_urbana = 'Rua';
+
+b) Criar no mínimo 3 consultas com operadores aritméticos
+
+    --Ônibus próximos de precisarem serem aposentados (15 anos de serviço)
+    SELECT id, placa, data_compra FROM onibus
+    where data_compra < now() - INTERVAL '14 year';
+    --Capacidade máxima de cada ônibus (pessoas em pé + sentadas)
+    SELECT id, placa, (qntd_assentos + 16) capacidade_maxima FROM Onibus
+    --Tempo médio de espera por dia
+    SELECT to_char(c.datahora, 'dd-MM-yyyy'), avg(d.datahora - c.datahora) from chega c
+    join deixa d on d.fk_cliente_id = c.fk_cliente_id
+    group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
+
+c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
+
+    --Alter no nome da coluna 'Numero' para que fique mais claro qual a info presente no campo
+    ALTER TABLE ponto_de_onibus
+    RENAME COLUMN Numero TO Numero_Endereco
+    --Alter no nome da coluna 'Hashcode' devido a alteração no conteúdo alocado do campo
+    ALTER TABLE cliente
+    RENAME COLUMN Hashcode TO Link_Imagem
+    --Alter no nome da coluna 'tipo_via_urbana' para uma opção mais simples e apropriada
+    Alter Table Endereco
+    RENAME COLUMN tipo_via_urbana TO Logradouro
+    --Alter no nome da coluna 'nome_via_urbana' para algo mais simples e apropriado 
+    Alter Table Endereco
+    RENAME COLUMN nome_via_urbana to Nome
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
-    a) Criar outras 5 consultas que envolvam like ou ilike
-         --seleciona placas cujo nome termina com 8
-         select * from linha where nome like '%8'; 
-         -- seleciona endereços no qual o nome da via começa com a letra a
-         select * from endereco where nome ilike 'a%';
-         -- seleciona bairros com "jardim" no nome (jardim camburi, jardim da penha, jardim américa.. etc.)
-         select * from endereco where bairro ilike 'jARDiM%';
-         -- selecion ônibus com placa inciando com a letra k 
-         select * from onibus where placa ilike 'k%';
-         -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
-         select * from endereco where cidade ilike 'v%';
-    b) Criar uma consulta para cada tipo de função data apresentada.
+a) Criar outras 5 consultas que envolvam like ou ilike
+
+    --seleciona placas cujo nome termina com 8
+    select * from linha where nome like '%8'; 
+    -- seleciona endereços no qual o nome da via começa com a letra a
+    select * from endereco where nome ilike 'a%';
+    -- seleciona bairros com "jardim" no nome (jardim camburi, jardim da penha, jardim américa.. etc.)
+    select * from endereco where bairro ilike 'jARDiM%';
+    -- selecion ônibus com placa inciando com a letra k 
+    select * from onibus where placa ilike 'k%';
+    -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
+    select * from endereco where cidade ilike 'v%';
+
+b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-    a) Criar minimo 3 de exclusão
-    b) Criar minimo 3 de atualização
+a) Criar minimo 3 de exclusão
+b) Criar minimo 3 de atualização
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-    a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
-    b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
+a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
+b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
-      -- conta a quantidade de ônibus por quantidade de assentos 
-        select count(placa) as qtd_onibus, qntd_assentos  from onibus group by qntd_assentos; 
-       -- conta quantas linhas foram criadas em cada data
-        select count(nome) as qtd_linhas, data_criacao from linha group by data_criacao;
-       -- conta quantas entregas em cada data/hora
-        select count(id) as qtd_entregas, datahora from entrega group by datahora;
-       -- conta quantos endereços por logradouro 
-       select count(id) as qtd_enderecos, logradouro from endereco group by logradouro;
-      -- conta quantos endereços por cidade 
-       select count(id) as qtd_enderecos, cidade from endereco group by cidade;
-    a) Criar minimo 2 envolvendo algum tipo de junção
-         select id as id_bus, placa from onibus inner join alocado
-         on (onibus.id = alocado.fk_onibus_id)
-         group by id;
-         
-       select bairro from endereco inner join ponto_de_onibus 
-          on (endereco.id = ponto_de_onibus.fk_endereco_id)
-          where logradouro = 'Rua'
-          group by bairro ;
 
+    --conta a quantidade de ônibus por quantidade de assentos 
+    select qntd_assentos, count(placa) as qtd_onibus from onibus 
+    group by qntd_assentos; 
+    --conta quantas linhas foram criadas em cada mês
+    select to_char(data_criacao, 'MM-yyyy') as mes_ano, count(nome) as qtd_linhas from linha 
+    group by to_char(data_criacao, 'MM-yyyy');
+    --conta quantas entregas de clientes os ônibus realizaram em cada hora
+    select to_char(datahora, 'HH') as hora, count(id) as qtd_entregas from entrega 
+    group by to_char(datahora, 'HH')
+    order by count(id) desc    
+    -- conta quantos endereços por logradouro 
+    select count(id) as qtd_enderecos, logradouro from endereco 
+    group by logradouro;
+    -- conta quantos endereços por cidade 
+    select count(id) as qtd_enderecos, cidade from endereco 
+    group by cidade;
 
+a) Criar minimo 2 envolvendo algum tipo de junção
+
+    select id as id_bus, placa from onibus inner join alocado
+    on (onibus.id = alocado.fk_onibus_id)
+    group by id;
+
+    select bairro from endereco inner join ponto_de_onibus 
+    on (endereco.id = ponto_de_onibus.fk_endereco_id)
+    where logradouro = 'Rua'
+    group by bairro ;
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-    a) Criar minimo 1 de cada tipo
-     select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
-     on (linha.id = percorre.fk_linha_id)
-     group by data_criacao;
+a) Criar minimo 1 de cada tipo
+
+    select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
+    on (linha.id = percorre.fk_linha_id)
+    group by data_criacao;
  
-     select count(numero_endereco) as qtd_pontos, qntd_assentos from ponto_de_onibus full join endereco 
-     on (ponto_de_onibus.fk_endereco_id = endereco.id)
-     group by qntd_assentos;
+    select count(numero_endereco) as qtd_pontos, qntd_assentos from ponto_de_onibus full join endereco 
+    on (ponto_de_onibus.fk_endereco_id = endereco.id)
+    group by qntd_assentos;
  
     select count(fk_cliente_id) as qtd_clientes, datahora from recebe right join cliente 
     on (recebe.fk_cliente_id = cliente.id)
@@ -244,15 +258,14 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
    select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
    on (chega.fk_cliente_id = cliente.id)
    group by datahora_chegada;
-
-
+   
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-        a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
-        b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
+a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
+b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
-     a) Criar minimo 1 envolvendo GROUP BY
-     b) Criar minimo 1 envolvendo algum tipo de junção
+a) Criar minimo 1 envolvendo GROUP BY
+b) Criar minimo 1 envolvendo algum tipo de junção
 
 ># Marco de Entrega 02: Do item 9.2 até o ítem 9.10<br>
 
