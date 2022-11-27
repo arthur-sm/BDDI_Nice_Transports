@@ -184,7 +184,16 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
     a) Criar outras 5 consultas que envolvam like ou ilike
-          select * from linha where nome like '%8';
+         --seleciona placas cujo nome termina com 8
+         select * from linha where nome like '%8'; 
+         -- seleciona endereços no qual o nome da via começa com a letra a
+         select * from endereco where nome ilike 'a%';
+         -- seleciona bairros com "jardim" no nome (jardim camburi, jardim da penha, jardim américa.. etc.)
+         select * from endereco where bairro ilike 'jARDiM%';
+         -- selecion ônibus com placa inciando com a letra k 
+         select * from onibus where placa ilike 'k%';
+         -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
+         select * from endereco where cidade ilike 'v%';
     b) Criar uma consulta para cada tipo de função data apresentada.
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
@@ -196,10 +205,46 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
+      -- conta a quantidade de ônibus por quantidade de assentos 
+        select count(placa) as qtd_onibus, qntd_assentos  from onibus group by qntd_assentos; 
+       -- conta quantas linhas foram criadas em cada data
+        select count(nome) as qtd_linhas, data_criacao from linha group by data_criacao;
+       -- conta quantas entregas em cada data/hora
+        select count(id) as qtd_entregas, datahora from entrega group by datahora;
+       -- conta quantos endereços por logradouro 
+       select count(id) as qtd_enderecos, logradouro from endereco group by logradouro;
+      -- conta quantos endereços por cidade 
+       select count(id) as qtd_enderecos, cidade from endereco group by cidade;
     a) Criar minimo 2 envolvendo algum tipo de junção
+         select id as id_bus, placa from onibus inner join alocado
+         on (onibus.id = alocado.fk_onibus_id)
+         group by id;
+         
+       select bairro from endereco inner join ponto_de_onibus 
+          on (endereco.id = ponto_de_onibus.fk_endereco_id)
+          where logradouro = 'Rua'
+          group by bairro ;
+
+
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
     a) Criar minimo 1 de cada tipo
+     select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
+     on (linha.id = percorre.fk_linha_id)
+     group by data_criacao;
+ 
+     select count(numero_endereco) as qtd_pontos, qntd_assentos from ponto_de_onibus full join endereco 
+     on (ponto_de_onibus.fk_endereco_id = endereco.id)
+     group by qntd_assentos;
+ 
+    select count(fk_cliente_id) as qtd_clientes, datahora from recebe right join cliente 
+    on (recebe.fk_cliente_id = cliente.id)
+    group by datahora;
+ 
+   select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
+   on (chega.fk_cliente_id = cliente.id)
+   group by datahora_chegada;
+
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
         a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
