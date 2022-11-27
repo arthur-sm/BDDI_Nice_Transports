@@ -255,12 +255,20 @@ a) Criar minimo 1 de cada tipo
     on (recebe.fk_cliente_id = cliente.id)
     group by datahora;
  
-   select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
-   on (chega.fk_cliente_id = cliente.id)
-   group by datahora_chegada;
-   
+    select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
+    on (chega.fk_cliente_id = cliente.id)
+    group by datahora_chegada;
+
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
 a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
+
+    --Lista de sentidos possíveis entre bairros em cada cidade
+    SELECT E1.cidade, E1.bairro as Origem, E2.bairro as Destino
+    FROM endereco E1, endereco E2
+    WHERE E1.id <> E2.id
+    AND E1.cidade = E2.cidade
+    order by E1.cidade
+
 b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
