@@ -201,7 +201,20 @@ a) Criar outras 5 consultas que envolvam like ou ilike
     select * from endereco where cidade ilike 'v%';
 
 b) Criar uma consulta para cada tipo de função data apresentada.
-
+     -- seleciona id e data de compra dos ônibus
+      select id, data_compra from onibus;
+     -- seleciona nome e data de criação das linhas
+      select nome, data_criacao from linha;
+     -- seleciona o id do ônibus e do ponto e a data/hora no qual o ônibus passou no ponto
+      select fk_onibus_id as onibus, fk_ponto_de_onibus_id as id_do_ponto, datahora as data_passagem from passa;
+     -- seleciona o id do ônibus e o horário de entrega de clientes
+      select fk_onibus_id as onibus, datahora as data_entega from entrega;
+     -- seleciona o id do ônibus e o horário de recebimento de clientes
+      select fk_onibus_id as onibus, datahora as data_recebimento from recebe;
+      -- seleciona o id do ponto e o horário de chegada de clientes
+      select fk_ponto_de_onibus_id as ponto, datahora_chegada as data_chegada from chega;
+      -- seleciona o id do ponto e o horário que o cliente deixa o ponto
+      select fk_ponto_de_onibus_id as ponto, datahora_deixa as data_deixa from deixa;
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
 a) Criar minimo 3 de exclusão
 b) Criar minimo 3 de atualização
