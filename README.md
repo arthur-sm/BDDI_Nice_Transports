@@ -5,7 +5,6 @@ Trabalho desenvolvido durante a disciplina de BD1
 
 ### 1. COMPONENTES<br>
 Integrantes do grupo<br>
-Antonio_Felipe_Coutinho_Gavazza:antoniofelipegavazza@gmail.com<br>
 Arthur_Santos_Miguel:arthursm40@gmail.com<br>
 Clara_Maestri:claramaestri.11@gmail.com<br>
 
