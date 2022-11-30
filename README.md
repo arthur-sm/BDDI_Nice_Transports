@@ -31,13 +31,11 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     
  **b) Crie uma lista com os 5 principais relatórios que poderão ser obtidos por meio do sistema proposto!**
     
-    - Relatório sobre horários com maior lotação;
-    - Relatórios sobre tempo médio de espera por ônibus em cada Bairro/Cidade;
+    - Relatórios sobre tempo médio de espera por ônibus em cada Cidade;
+    - Relatório de lotação por horário;
     - Relatórios sobre linhas mais utilizadas pelos passageiros;
     - Relatórios sobre quantidade de pontos por Cidade/Bairro;
-    - Relatórios sobre a quantidade de linhas que atendem cada ponto;
-
-
+    - Relatórios de tempo de conclusão do trajeto por linha;
  
  
 #### 4.3 TABELA DE DADOS DO SISTEMA:
@@ -100,9 +98,9 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 [Script de insert nas tabelas](https://github.com/arthur-sm/BDDI_Nice_Transports/raw/master/arquivos/Scripts/insert.sql "Script de insert nas tabelas - Nice Transports")
 
 ### 9	TABELAS E PRINCIPAIS CONSULTAS<br>
-Tabelas: "onibus", "linha", "percorre", "alocado", "endereco", "ponto_de_onibus", "passa", "entrega", "cliente", "recebe", "chega" e "deixa"
+**Tabelas**: "onibus", "linha", "percorre", "alocado", "endereco", "ponto_de_onibus", "passa", "entrega", "cliente", "recebe", "chega" e "deixa"
 
-Principais consultas:
+**Principais consultas**:
 
     --Tempo médio de espera de ônibus por cidade (tabelas: chega, deixa, ponto_de_onibus e endereco)
     select e.cidade, avg(d.datahora - c.datahora) from chega c
@@ -157,7 +155,7 @@ Principais consultas:
     select * from ponto_de_onibus where qntd_assentos < 12;
 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
-a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
+**a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not**
 
     select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
     
@@ -169,7 +167,7 @@ a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not
     
     select * from endereco where not tipo_via_urbana = 'Rua';
 
-b) Criar no mínimo 3 consultas com operadores aritméticos
+**b) Criar no mínimo 3 consultas com operadores aritméticos**
 
     --Ônibus próximos de precisarem serem aposentados (15 anos de serviço)
     SELECT id, placa, data_compra FROM onibus
@@ -183,7 +181,7 @@ b) Criar no mínimo 3 consultas com operadores aritméticos
     join deixa d on d.fk_cliente_id = c.fk_cliente_id
     group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
 
-c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas
+**c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas**
 
     --Alter no nome da coluna 'Numero' para que fique mais claro qual a info presente no campo
     ALTER TABLE ponto_de_onibus
@@ -206,7 +204,7 @@ c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou ta
     Alter table Deixa rename column datahora to datahora_deixa;
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
-a) Criar outras 5 consultas que envolvam like ou ilike
+**a) Criar outras 5 consultas que envolvam like ou ilike**
 
     --seleciona placas cujo nome termina com 8
     select * from linha where nome like '%8'; 
@@ -223,7 +221,7 @@ a) Criar outras 5 consultas que envolvam like ou ilike
     -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
     select * from endereco where cidade ilike 'v%';
 
-b) Criar uma consulta para cada tipo de função data apresentada.
+**b) Criar uma consulta para cada tipo de função data apresentada.**
 
       --seleciona id e data de compra dos ônibus
       select id, data_compra from onibus;
@@ -247,20 +245,20 @@ b) Criar uma consulta para cada tipo de função data apresentada.
       select fk_ponto_de_onibus_id as ponto, datahora_deixa as data_deixa from deixa;
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
-a) Criar minimo 3 de exclusão
+**a) Criar minimo 3 de exclusão**
 
     delete Onibus where Placa in ('JKB1530','KJF8291')
     delete Ponto_de_Onibus where qntd_assentos <= 10
     delete Percorre where Ativo = 0
 
-b) Criar minimo 3 de atualização
+**b) Criar minimo 3 de atualização**
 
     update Onibus set data_compra=NOW()
     update Endereco set cidade='Vitoria' where cidade='Vitória'
     update Linha set Nome = 'NO29' where Nome = 'AO63'
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
-a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
+**a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado**
 
     select * FROM Onibus onb
     join Alocado alc on alc.fk_onibus_id = onb.id
@@ -275,7 +273,7 @@ a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no
     join recebe rcb on rcb.fk_cliente_id = cnt.id
     join entrega ent on ent.fk_cliente_id = cnt.id
 
-b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho
+**b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho**
 
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
 
@@ -300,7 +298,7 @@ b) Outras junções que o grupo considere como sendo as de principal importânci
     select count(id) as qtd_enderecos, cidade from endereco 
     group by cidade;
 
-a) Criar minimo 2 envolvendo algum tipo de junção
+**a) Criar minimo 2 envolvendo algum tipo de junção**
 
     select id as id_bus, placa from onibus inner join alocado
     on (onibus.id = alocado.fk_onibus_id)
@@ -312,7 +310,7 @@ a) Criar minimo 2 envolvendo algum tipo de junção
     group by bairro ;
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
-a) Criar minimo 1 de cada tipo
+**a) Criar minimo 1 de cada tipo**
 
     select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
     on (linha.id = percorre.fk_linha_id)
@@ -331,7 +329,7 @@ a) Criar minimo 1 de cada tipo
     group by datahora_chegada;
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
-a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)
+**a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)**
 
     --Lista de sentidos possíveis entre bairros em cada cidade
     SELECT E1.cidade, E1.bairro as Origem, E2.bairro as Destino
@@ -340,7 +338,7 @@ a) Uma junção que envolva Self Join (caso não ocorra na base justificar e sub
     AND E1.cidade = E2.cidade
     order by E1.cidade
 
-b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
+**b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho**
  
     -- Mostra horário de chegada e saída do cliente do ponto de ônibus
     create view ChegadaSaida_Ponto as
@@ -358,8 +356,8 @@ b) Outras junções com views que o grupo considere como sendo de relevante impo
 
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
-a) Criar minimo 1 envolvendo GROUP BY
-b) Criar minimo 1 envolvendo algum tipo de junção
+**a) Criar minimo 1 envolvendo GROUP BY**
+**b) Criar minimo 1 envolvendo algum tipo de junção**
     
     SELECT E.cidade, E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
     join endereco E on E.id = P.fk_endereco_id
