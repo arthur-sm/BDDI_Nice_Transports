@@ -282,12 +282,21 @@ a) Uma junção que envolva Self Join (caso não ocorra na base justificar e sub
     order by E1.cidade
 
 b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
+ 
 -- Mostra horário de chegada e saída do cliente do ponto de ônibus
  create view ChegadaSaida_Ponto as
    select c.datahora_chegada, d.datahora_deixa from chega c
    join deixa d on d.fk_cliente_id = c.fk_cliente_id
 
-select * from ChegadaSaida_Ponto
+   select * from ChegadaSaida_Ponto
+ 
+ --- Mostra horário em que um cliente foi deixado ou recebido
+ create view Onibus_RecebeEntrega as
+   select r.datahora as recebeu , e.datahora as entregou from recebe r
+   join entrega e on r.fk_cliente_id = e.fk_cliente_id
+
+ select * from Onibus_RecebeEntrega
+
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
 a) Criar minimo 1 envolvendo GROUP BY
