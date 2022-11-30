@@ -380,6 +380,12 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     SELECT E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
     join endereco E on E.id = P.fk_endereco_id
     Where E.bairro in (select bairro from endereco where logradouro <> 'Avenida')
+    
+    select o.id as onibus, p.fk_ponto_de_onibus_id as ponto from passa p join onibus o 
+    on (o.id = p.fk_ponto_de_onibus_id)
+    join percorre pe on (p.fk_ponto_de_onibus_id = pe.fk_ponto_de_onibus_id)
+    where pe.fk_ponto_de_onibus_id in (select fk_ponto_de_onibus_id from percorre where ativo = true);
+
 
 ># Marco de Entrega 02: Do item 9.2 até o ítem 9.10<br>
 
