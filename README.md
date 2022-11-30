@@ -361,6 +361,25 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     join entrega e on r.fk_cliente_id = e.fk_cliente_id
 
     select * from Onibus_RecebeEntrega
+   --- Mostra linhas inativas
+      create view linhas_inativas as
+      select nome from linha l join percorre p on (l.id = p.fk_linha_id)
+      where (p.ativo = false)
+
+     select * from linhas_inativas
+   --- Mostra linhas ativas
+     create view linhas_ativas as
+      select nome from linha l join percorre p on (l.id = p.fk_linha_id)
+      where (p.ativo = true)
+
+     select * from linhas_ativas
+ --- Mostra ordem dos ativos
+ create view ordem_ativos as
+ select l.nome, p.ordem from linha l join percorre p on (l.id = p.fk_linha_id)
+ where (p.ativo = true) 
+
+ select * from ordem_ativos
+
 
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
