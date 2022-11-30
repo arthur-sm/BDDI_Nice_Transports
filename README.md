@@ -297,6 +297,10 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     -- conta quantos endereços por cidade 
     select count(id) as qtd_enderecos, cidade from endereco 
     group by cidade;
+    -- agrupa os horários em que um cliente deixou o ponto com um intervalo de 15min
+     select to_char(to_timestamp(floor((extract('epoch' from datahora_deixa) / 900 )) * 300) 
+      AT TIME ZONE 'UTC', 'HH24:MI') as datadeixou, count(*) from deixa
+      group by datadeixou;
 
 **a) Criar minimo 2 envolvendo algum tipo de junção**
 
