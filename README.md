@@ -274,7 +274,11 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     join entrega ent on ent.fk_cliente_id = cnt.id
 
 **b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho**
-
+ -- Ordenar por nome o id da linha, a linha e a data de alocação
+    select a.fk_linha_id as linha, a.datahora as data_criacao, l.nome from alocado a inner join linha l
+     on (l.id = fk_linha_id)
+     order by nome;
+-- Ordenar por id do ônibus a linha, a dada de alocado e a quantidade de assentos
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
 
     --conta a quantidade de ônibus por quantidade de assentos 
