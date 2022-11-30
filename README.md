@@ -365,10 +365,12 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
 **a) Criar minimo 1 envolvendo GROUP BY**
- select count(a.fk_linha_id) as qtd_linhas, l.nome from alocado a inner join linha l
+ 
+  select count(a.fk_linha_id) as qtd_linhas, l.nome from alocado a inner join linha l
   on (l.id = a.fk_linha_id)
   where l.nome in (select nome from linha where nome like 'M%')
   group by nome;
+ 
 **b) Criar minimo 1 envolvendo algum tipo de junção**
     
     SELECT E.cidade, E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
