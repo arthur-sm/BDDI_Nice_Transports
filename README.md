@@ -224,23 +224,40 @@ a) Criar outras 5 consultas que envolvam like ou ilike
     select * from endereco where cidade ilike 'v%';
 
 b) Criar uma consulta para cada tipo de função data apresentada.
-     -- seleciona id e data de compra dos ônibus
+
+      --seleciona id e data de compra dos ônibus
       select id, data_compra from onibus;
-     -- seleciona nome e data de criação das linhas
+     
+      --seleciona nome e data de criação das linhas
       select nome, data_criacao from linha;
-     -- seleciona o id do ônibus e do ponto e a data/hora no qual o ônibus passou no ponto
+     
+      -- seleciona o id do ônibus e do ponto e a data/hora no qual o ônibus passou no ponto
       select fk_onibus_id as onibus, fk_ponto_de_onibus_id as id_do_ponto, datahora as data_passagem from passa;
-     -- seleciona o id do ônibus e o horário de entrega de clientes
+     
+      -- seleciona o id do ônibus e o horário de entrega de clientes
       select fk_onibus_id as onibus, datahora as data_entega from entrega;
-     -- seleciona o id do ônibus e o horário de recebimento de clientes
+     
+      -- seleciona o id do ônibus e o horário de recebimento de clientes
       select fk_onibus_id as onibus, datahora as data_recebimento from recebe;
+     
       -- seleciona o id do ponto e o horário de chegada de clientes
       select fk_ponto_de_onibus_id as ponto, datahora_chegada as data_chegada from chega;
+    
       -- seleciona o id do ponto e o horário que o cliente deixa o ponto
       select fk_ponto_de_onibus_id as ponto, datahora_deixa as data_deixa from deixa;
+
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
 a) Criar minimo 3 de exclusão
+
+    delete Onibus where Placa in ('JKB1530','KJF8291')
+    delete Ponto_de_Onibus where qntd_assentos <= 10
+    delete Percorre where Ativo = 0
+
 b) Criar minimo 3 de atualização
+
+    update Onibus set data_compra=NOW()
+    update Endereco set cidade='Vitoria' where cidade='Vitória'
+    update Linha set Nome = 'NO29' where Nome = 'AO63'
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
 a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado
@@ -325,19 +342,19 @@ a) Uma junção que envolva Self Join (caso não ocorra na base justificar e sub
 
 b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho
  
--- Mostra horário de chegada e saída do cliente do ponto de ônibus
- create view ChegadaSaida_Ponto as
-   select c.datahora_chegada, d.datahora_deixa from chega c
-   join deixa d on d.fk_cliente_id = c.fk_cliente_id
+    -- Mostra horário de chegada e saída do cliente do ponto de ônibus
+    create view ChegadaSaida_Ponto as
+    select c.datahora_chegada, d.datahora_deixa from chega c
+    join deixa d on d.fk_cliente_id = c.fk_cliente_id
 
-   select * from ChegadaSaida_Ponto
+    select * from ChegadaSaida_Ponto
  
- --- Mostra horário em que um cliente foi deixado ou recebido
- create view Onibus_RecebeEntrega as
-   select r.datahora as recebeu , e.datahora as entregou from recebe r
-   join entrega e on r.fk_cliente_id = e.fk_cliente_id
+    --- Mostra horário em que um cliente foi deixado ou recebido
+    create view Onibus_RecebeEntrega as
+    select r.datahora as recebeu , e.datahora as entregou from recebe r
+    join entrega e on r.fk_cliente_id = e.fk_cliente_id
 
- select * from Onibus_RecebeEntrega
+    select * from Onibus_RecebeEntrega
 
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
