@@ -376,6 +376,10 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     SELECT E.cidade, E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
     join endereco E on E.id = P.fk_endereco_id
     Where E.cidade in (select cidade from endereco where cidade <> 'Vitória')
+    
+    SELECT E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
+    join endereco E on E.id = P.fk_endereco_id
+    Where E.bairro in (select bairro from endereco where logradouro <> 'Avenida')
 
 ># Marco de Entrega 02: Do item 9.2 até o ítem 9.10<br>
 
