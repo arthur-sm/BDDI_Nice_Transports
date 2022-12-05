@@ -142,12 +142,15 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
     -- seleciona os ônibus com menor quantidade de assentos na tabela
     select * from onibus where qntd_assentos < 40;
+![image](https://user-images.githubusercontent.com/75951646/205525231-f9833ee7-ddb0-40fa-a2fc-627d0992c939.png)
 
     
     -- seleciona com endereço na serra
     select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
     join endereco e on e.id = p.fk_endereco_id 
     where e.cidade = 'Serra'
+![image](https://user-images.githubusercontent.com/75951646/205525530-0ecee457-2bc2-424c-a8f1-2bfcc38a9810.png)
+
     
     -- seleciona linhas inativas
     select * from percorre where ativo = false;
@@ -155,7 +158,6 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     -- seleciona pontos de ônibus com menos assentos
     select * from ponto_de_onibus where qntd_assentos < 12;
  
- ![image](https://user-images.githubusercontent.com/75951646/205525231-f9833ee7-ddb0-40fa-a2fc-627d0992c939.png)
 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
 **a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not**
