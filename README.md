@@ -332,9 +332,10 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     on (recebe.fk_cliente_id = cliente.id)
     group by datahora;
  
-    select count(fk_cliente_id) as qtd_clientes, datahora_chegada from chega right join cliente 
+    select count(fk_cliente_id) as qtd_clientes,to_char(to_timestamp(floor((extract('epoch' from datahora_chegada) / 900 )) * 300) 
+    AT TIME ZONE 'UTC', 'HH24:MI') as data_chegou from chega right join cliente 
     on (chega.fk_cliente_id = cliente.id)
-    group by datahora_chegada;
+    group by data_chegou;;
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
 **a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)**
