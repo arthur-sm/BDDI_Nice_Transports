@@ -201,22 +201,28 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     --Alter no nome da coluna 'Numero' para que fique mais claro qual a info presente no campo
     ALTER TABLE ponto_de_onibus
     RENAME COLUMN Numero TO Numero_Endereco
+![image](https://user-images.githubusercontent.com/75951646/205696737-8b5963b4-6145-423a-92fa-f141da9f47ad.png)
     
     --Alter no nome da coluna 'Hashcode' devido a alteração no conteúdo alocado do campo
     ALTER TABLE cliente
     RENAME COLUMN Hashcode TO Link_Imagem
-    
+![image](https://user-images.githubusercontent.com/75951646/205697023-3488b5b6-f564-427a-8087-c1b9beca3668.png)
+   
     --Alter no nome da coluna 'tipo_via_urbana' para uma opção mais simples e apropriada
     Alter Table Endereco
     RENAME COLUMN tipo_via_urbana TO Logradouro
+![image](https://user-images.githubusercontent.com/75951646/205697136-d9d681d9-55c4-44b2-917d-303784dd2679.png)
     
     --Alter no nome da coluna 'nome_via_urbana' para algo mais simples e apropriado 
     Alter Table Endereco
     RENAME COLUMN nome_via_urbana to Nome
+![image](https://user-images.githubusercontent.com/75951646/205697158-da157f57-6c5e-4423-a2a8-427a0fe63e4b.png)
 
     Alter table Chega rename column datahora to datahora_chegada;
-    Alter table Cliente rename column link_imagem to link_hashcode;
+ ![image](https://user-images.githubusercontent.com/75951646/205697289-a3240774-da62-4092-be14-a8b1284079f3.png)
+                            
     Alter table Deixa rename column datahora to datahora_deixa;
+![image](https://user-images.githubusercontent.com/75951646/205697469-6aee7928-4734-4847-958b-5b5f1415393b.png)
 
 #### 9.4	CONSULTAS QUE USAM OPERADORES LIKE E DATAS (Mínimo 12) <br>
 **a) Criar outras 5 consultas que envolvam like ou ilike**
@@ -302,10 +308,11 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 
 **b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho**
-     -- Ordenar por nome o id da linha, a linha e a data de alocação
-     select a.fk_linha_id as linha, a.datahora as data_criacao, l.nome from alocado a inner join linha l
-     on (l.id = fk_linha_id)
-     order by nome;
+      
+      -- Ordenar por nome o id da linha, a linha e a data de alocação
+      select a.fk_linha_id as linha, a.datahora as data_criacao, l.nome from alocado a inner join linha l
+      on (l.id = fk_linha_id)
+      order by nome;
 ![image](https://user-images.githubusercontent.com/75951646/205530073-94d22057-3963-4f1b-b7f8-927429d4c904.png)
 
     -- Ordenar por nome da linha a id do ônibus e quantidade de assentos
