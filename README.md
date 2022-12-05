@@ -223,41 +223,53 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
     --seleciona placas cujo nome termina com 8
     select * from linha where nome like '%8'; 
+![image](https://user-images.githubusercontent.com/75951646/205529558-c690af1a-0c25-4af9-91e3-13e8c83c1a59.png)
     
     -- seleciona endereços no qual o nome da via começa com a letra a
     select * from endereco where nome ilike 'a%';
+![image](https://user-images.githubusercontent.com/75951646/205529586-f420dc01-ea98-4663-b956-98f6835ac669.png)
     
     -- seleciona bairros com "jardim" no nome (jardim camburi, jardim da penha, jardim américa.. etc.)
     select * from endereco where bairro ilike 'jARDiM%';
+![image](https://user-images.githubusercontent.com/75951646/205529611-606f003c-3fdf-4523-a2f4-46de9544350c.png)
     
     -- selecion ônibus com placa inciando com a letra k 
     select * from onibus where placa ilike 'k%';
+![image](https://user-images.githubusercontent.com/75951646/205529639-f6cd7960-2956-4729-8c2b-1e0ec19f8fd5.png)
     
-    -- seleciona endereços cuja cidade começa com a letra v (vitória ou vila velha)
+    -- seleciona endereços cuja cidade começa com a letra v (vitória, viana ou vila velha)
     select * from endereco where cidade ilike 'v%';
+![image](https://user-images.githubusercontent.com/75951646/205529681-f4480784-40de-4a81-acf2-ecfeb837182b.png)
 
 **b) Criar uma consulta para cada tipo de função data apresentada.**
 
       --seleciona id e data de compra dos ônibus
       select id, data_compra from onibus;
+![image](https://user-images.githubusercontent.com/75951646/205529716-711bca92-38ee-4a6c-8ba5-0c4a23a20d48.png)
      
       --seleciona nome e data de criação das linhas
       select nome, data_criacao from linha;
+![image](https://user-images.githubusercontent.com/75951646/205529751-ef647afd-7d97-41ea-8bb8-5c1d68407f16.png)
      
       -- seleciona o id do ônibus e do ponto e a data/hora no qual o ônibus passou no ponto
       select fk_onibus_id as onibus, fk_ponto_de_onibus_id as id_do_ponto, datahora as data_passagem from passa;
+![image](https://user-images.githubusercontent.com/75951646/205529784-b33a3351-9c2c-4fec-a3c0-b623b33903cd.png)
      
       -- seleciona o id do ônibus e o horário de entrega de clientes
       select fk_onibus_id as onibus, datahora as data_entega from entrega;
+![image](https://user-images.githubusercontent.com/75951646/205529840-9f5c2620-d27f-4371-90c0-2eba0623f074.png)
      
       -- seleciona o id do ônibus e o horário de recebimento de clientes
       select fk_onibus_id as onibus, datahora as data_recebimento from recebe;
+![image](https://user-images.githubusercontent.com/75951646/205529863-35116f5d-1f30-46dd-9452-7b8cdaa4d0a6.png)
      
       -- seleciona o id do ponto e o horário de chegada de clientes
       select fk_ponto_de_onibus_id as ponto, datahora_chegada as data_chegada from chega;
+![image](https://user-images.githubusercontent.com/75951646/205529890-75ef102e-4560-42c2-8014-71b95147d39d.png)
     
       -- seleciona o id do ponto e o horário que o cliente deixa o ponto
       select fk_ponto_de_onibus_id as ponto, datahora_deixa as data_deixa from deixa;
+![image](https://user-images.githubusercontent.com/75951646/205529920-0219c381-c029-40cb-81e5-f8face93ce34.png)
 
 #### 9.5	INSTRUÇÕES APLICANDO ATUALIZAÇÃO E EXCLUSÃO DE DADOS (Mínimo 6)<br>
 **a) Criar minimo 3 de exclusão**
@@ -287,39 +299,77 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     join cliente cnt on cnt.id = dxa.fk_cliente_id
     join recebe rcb on rcb.fk_cliente_id = cnt.id
     join entrega ent on ent.fk_cliente_id = cnt.id
+![image](https://user-images.githubusercontent.com/75951646/205530017-d6b81c76-7460-4c65-a73d-beb1485ddd68.png)
+
 
 **b) Outras junções que o grupo considere como sendo as de principal importância para o trabalho**
- -- Ordenar por nome o id da linha, a linha e a data de alocação
-    select a.fk_linha_id as linha, a.datahora as data_criacao, l.nome from alocado a inner join linha l
+     -- Ordenar por nome o id da linha, a linha e a data de alocação
+     select a.fk_linha_id as linha, a.datahora as data_criacao, l.nome from alocado a inner join linha l
      on (l.id = fk_linha_id)
      order by nome;
--- Ordenar por id do ônibus a linha, a dada de alocado e a quantidade de assentos
+![image](https://user-images.githubusercontent.com/75951646/205530073-94d22057-3963-4f1b-b7f8-927429d4c904.png)
+
+    -- Ordenar por nome da linha a id do ônibus e quantidade de assentos
+     select l.nome as nome_linha, a.fk_onibus_id as id_onibus, o.qntd_assentos as assentos from linha l 
+     join alocado a on (l.id = a.fk_linha_id)
+     join onibus o on (o.id = a.fk_onibus_id)
+     order by nome; 
+![image](https://user-images.githubusercontent.com/75951646/205530577-b48fcbf5-2660-44ec-94ac-34c33d6efbd2.png)
+     
+    -- Ordenar as linhas por ordem de passagem
+    select p.ordem, p.fk_linha_id as id_linha, l.nome  from percorre p 
+    join linha l on (p.fk_linha_id = l.id)
+    order by ordem;
+![image](https://user-images.githubusercontent.com/75951646/205531601-732a0507-d6a1-4305-8824-f1ff3306fbaf.png)
+
+    --- Ordenar por id do cliente as horas de recebimento e entrega
+    select e.fk_cliente_id as cliente, e.datahora as hora_entrega, r.datahora as hora_recebe from entrega e
+    join recebe r on (r.fk_cliente_id = e.fk_cliente_id)
+    order by e.fk_cliente_id;
+
+ ![image](https://user-images.githubusercontent.com/75951646/205532253-1074b80f-09e0-4310-b20c-52abf02931bc.png)
+      
+      --- Ordenar por id do cliente as horas de chegada e saída do cliente no ponto
+       select c.fk_cliente_id as cliente, c.datahora_chegada as hora_chegada, d.datahora_deixa as hora_saida from chega c
+       join deixa d on (c.fk_cliente_id = d.fk_cliente_id)
+       order by d.fk_cliente_id;
+ 
+ ![image](https://user-images.githubusercontent.com/75951646/205532545-12f80f83-521a-44f2-8d95-8e516ccfca43.png)
+
+
 #### 9.7	CONSULTAS COM GROUP BY E FUNÇÕES DE AGRUPAMENTO (Mínimo 6)<br>
 
     --conta a quantidade de ônibus por quantidade de assentos 
     select qntd_assentos, count(placa) as qtd_onibus from onibus 
     group by qntd_assentos; 
+![image](https://user-images.githubusercontent.com/75951646/205532584-6dde7f65-ff93-4015-81c6-9caf8293a042.png)
     
     --conta quantas linhas foram criadas em cada mês
     select to_char(data_criacao, 'MM-yyyy') as mes_ano, count(nome) as qtd_linhas from linha 
     group by to_char(data_criacao, 'MM-yyyy');
+![image](https://user-images.githubusercontent.com/75951646/205532620-23cbe4b9-a392-4b50-b5b0-f788d867df24.png)
     
     --conta quantas entregas de clientes os ônibus realizaram em cada hora
     select to_char(datahora, 'HH') as hora, count(id) as qtd_entregas from entrega 
     group by to_char(datahora, 'HH')
     order by count(id) desc    
+![image](https://user-images.githubusercontent.com/75951646/205532658-720c9b83-1703-4957-8f30-0533d57c4885.png)
     
     -- conta quantos endereços por logradouro 
     select count(id) as qtd_enderecos, logradouro from endereco 
     group by logradouro;
+![image](https://user-images.githubusercontent.com/75951646/205532840-af3cbc6c-9a7c-4a99-9a85-3ad06083e51e.png)
     
     -- conta quantos endereços por cidade 
     select count(id) as qtd_enderecos, cidade from endereco 
     group by cidade;
+![image](https://user-images.githubusercontent.com/75951646/205533006-9bd06837-84a0-4d4a-9e50-0c363894b2fd.png)
+
     -- agrupa os horários em que um cliente deixou o ponto com um intervalo de 15min
      select to_char(to_timestamp(floor((extract('epoch' from datahora_deixa) / 900 )) * 300) 
       AT TIME ZONE 'UTC', 'HH24:MI') as datadeixou, count(*) from deixa
       group by datadeixou;
+![image](https://user-images.githubusercontent.com/75951646/205533051-f381df91-3908-41a6-9978-626313521385.png)
 
 **a) Criar minimo 2 envolvendo algum tipo de junção**
 
