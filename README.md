@@ -376,11 +376,14 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     select id as id_bus, placa from onibus inner join alocado
     on (onibus.id = alocado.fk_onibus_id)
     group by id;
+![image](https://user-images.githubusercontent.com/75951646/205533456-5895894c-9516-4557-bd0b-f5541a0b32d0.png)
 
     select bairro from endereco inner join ponto_de_onibus 
     on (endereco.id = ponto_de_onibus.fk_endereco_id)
     where logradouro = 'Rua'
     group by bairro ;
+
+ ![image](https://user-images.githubusercontent.com/75951646/205533542-0800f6fc-237b-4f57-9344-c697a1a8edc6.png)
 
 #### 9.8	CONSULTAS COM LEFT, RIGHT E FULL JOIN (Mínimo 4)<br>
 **a) Criar minimo 1 de cada tipo**
@@ -388,19 +391,24 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     select count(nome) as qtd_linhas, data_criacao  from linha left join percorre 
     on (linha.id = percorre.fk_linha_id)
     group by data_criacao;
- 
+ ![image](https://user-images.githubusercontent.com/75951646/205533593-e345238a-01d5-4589-abdd-baa8ea19d4f8.png)
+
     select count(numero_endereco) as qtd_pontos, qntd_assentos from ponto_de_onibus full join endereco 
     on (ponto_de_onibus.fk_endereco_id = endereco.id)
     group by qntd_assentos;
+
+![image](https://user-images.githubusercontent.com/75951646/205533630-c91d3cc9-80e0-4224-b0b3-3bc4af4413d7.png)
  
     select count(fk_cliente_id) as qtd_clientes, datahora from recebe right join cliente 
     on (recebe.fk_cliente_id = cliente.id)
     group by datahora;
+![image](https://user-images.githubusercontent.com/75951646/205533686-9dafa498-3f67-4212-ab5c-19ad4b2e37f5.png)
  
     select count(fk_cliente_id) as qtd_clientes,to_char(to_timestamp(floor((extract('epoch' from datahora_chegada) / 900 )) * 300) 
     AT TIME ZONE 'UTC', 'HH24:MI') as data_chegou from chega right join cliente 
     on (chega.fk_cliente_id = cliente.id)
     group by data_chegou;;
+![image](https://user-images.githubusercontent.com/75951646/205533732-a3ac1ffb-c536-4809-9870-66515cc205e5.png)
 
 #### 9.9	CONSULTAS COM SELF JOIN E VIEW (Mínimo 6)<br>
 **a) Uma junção que envolva Self Join (caso não ocorra na base justificar e substituir por uma view)**
@@ -411,6 +419,7 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     WHERE E1.id <> E2.id
     AND E1.cidade = E2.cidade
     order by E1.cidade
+![image](https://user-images.githubusercontent.com/75951646/205533789-3cb58d33-bb12-4d31-966b-cd4e3c055e35.png)
 
 **b) Outras junções com views que o grupo considere como sendo de relevante importância para o trabalho**
  
@@ -420,7 +429,8 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     join deixa d on d.fk_cliente_id = c.fk_cliente_id
 
     select * from ChegadaSaida_Ponto
- 
+ ![image](https://user-images.githubusercontent.com/75951646/205533827-70b8f7ff-d912-4633-9e3b-edeba8a9e307.png)
+
     --- Mostra horário em que um cliente foi deixado ou recebido
     create view Onibus_RecebeEntrega as
     select r.datahora as recebeu , e.datahora as entregou from recebe r
@@ -431,6 +441,7 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
       create view linhas_inativas as
       select nome from linha l join percorre p on (l.id = p.fk_linha_id)
       where (p.ativo = false)
+![image](https://user-images.githubusercontent.com/75951646/205533875-f293493c-a252-4446-b3d7-e021ae05e158.png)
 
      select * from linhas_inativas
    --- Mostra linhas ativas
@@ -439,37 +450,44 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
       where (p.ativo = true)
 
      select * from linhas_ativas
- --- Mostra ordem dos ativos
- create view ordem_ativos as
- select l.nome, p.ordem from linha l join percorre p on (l.id = p.fk_linha_id)
- where (p.ativo = true) 
+ ![image](https://user-images.githubusercontent.com/75951646/205533950-747ae234-46c5-45cf-9a39-38c506b7976b.png)
 
- select * from ordem_ativos
+ --- Mostra ordem dos ativos
+     create view ordem_ativos as
+     select l.nome, p.ordem from linha l join percorre p on (l.id = p.fk_linha_id)
+     where (p.ativo = true) 
+
+     select * from ordem_ativos
+![image](https://user-images.githubusercontent.com/75951646/205534014-0bdc5e83-a97a-4639-9241-a683f8c071af.png)
 
 
 
 #### 9.10	SUBCONSULTAS (Mínimo 4)<br>
 **a) Criar minimo 1 envolvendo GROUP BY**
  
-  select count(a.fk_linha_id) as qtd_linhas, l.nome from alocado a inner join linha l
-  on (l.id = a.fk_linha_id)
-  where l.nome in (select nome from linha where nome like 'M%')
-  group by nome;
+    select count(a.fk_linha_id) as qtd_linhas, l.nome from alocado a inner join linha l
+    on (l.id = a.fk_linha_id)
+    where l.nome in (select nome from linha where nome like 'M%')
+    group by nome;
+![image](https://user-images.githubusercontent.com/75951646/205534049-a5a5172b-27a8-42c6-8fb4-3b7ccb17b712.png)
  
 **b) Criar minimo 1 envolvendo algum tipo de junção**
     
     SELECT E.cidade, E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
     join endereco E on E.id = P.fk_endereco_id
     Where E.cidade in (select cidade from endereco where cidade <> 'Vitória')
+![image](https://user-images.githubusercontent.com/75951646/205534118-c9b13fc1-3d82-47c6-8d33-407e6a8abde3.png)
     
     SELECT E.bairro, E.logradouro, E.nome, P.numero_endereco FROM ponto_de_onibus P
     join endereco E on E.id = P.fk_endereco_id
     Where E.bairro in (select bairro from endereco where logradouro <> 'Avenida')
-    
+ ![image](https://user-images.githubusercontent.com/75951646/205534157-2fdab1eb-0942-47fb-b737-93dd60ae8a7a.png)
+   
     select o.id as onibus, p.fk_ponto_de_onibus_id as ponto from passa p join onibus o 
     on (o.id = p.fk_ponto_de_onibus_id)
     join percorre pe on (p.fk_ponto_de_onibus_id = pe.fk_ponto_de_onibus_id)
     where pe.fk_ponto_de_onibus_id in (select fk_ponto_de_onibus_id from percorre where ativo = true);
+![image](https://user-images.githubusercontent.com/75951646/205534188-d20d901d-a85c-463e-b555-e02897cdb614.png)
 
 
 ># Marco de Entrega 02: Do item 9.2 até o ítem 9.10<br>
