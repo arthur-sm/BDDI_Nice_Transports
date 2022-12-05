@@ -142,6 +142,8 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
     -- seleciona os ônibus com menor quantidade de assentos na tabela
     select * from onibus where qntd_assentos < 40;
+                                                  ![image](https://user-images.githubusercontent.com/75951646/205525231-f9833ee7-ddb0-40fa-a2fc-627d0992c939.png)
+
     
     -- seleciona com endereço na serra
     select p.id, e.cidade, e.bairro, e.tipo_via_urbana, e.nome_via_urbana, p.numero from ponto_de_onibus p
