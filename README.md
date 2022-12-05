@@ -286,19 +286,18 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
 **a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado**
-
-    select * FROM Onibus onb
-    join Alocado alc on alc.fk_onibus_id = onb.id
-    join Linha lin on lin.id = alc.fk_linha_id
-    join Percorre per on per.fk_linha_id = lin.id
-    join ponto_de_onibus pdo on pdo.id = per.fk_ponto_de_onibus_id
-    join passa pss on pss.fk_ponto_de_onibus_id = pdo.id
-    join endereco edr on edr.id = pdo.id
-    join chega cga on cga.fk_ponto_de_onibus_id = pdo.id
-    join deixa dxa on dxa.fk_ponto_de_onibus_id = cga.fk_ponto_de_onibus_id
-    join cliente cnt on cnt.id = dxa.fk_cliente_id
-    join recebe rcb on rcb.fk_cliente_id = cnt.id
-    join entrega ent on ent.fk_cliente_id = cnt.id
+       select * FROM Onibus onb
+       inner join Alocado alc on alc.fk_onibus_id = onb.id
+       inner join Linha lin on lin.id = alc.fk_linha_id
+       inner join Percorre per on per.fk_linha_id = lin.id
+       inner join ponto_de_onibus pdo on pdo.id = per.fk_ponto_de_onibus_id
+       inner join passa pss on pss.fk_ponto_de_onibus_id = pdo.id
+       inner join endereco edr on edr.id = pdo.id
+       inner join chega cga on cga.fk_ponto_de_onibus_id = pdo.id
+       inner join deixa dxa on dxa.fk_ponto_de_onibus_id = cga.fk_ponto_de_onibus_id
+       inner join cliente cnt on cnt.id = dxa.fk_cliente_id
+       inner join recebe rcb on rcb.fk_cliente_id = cnt.id
+       inner join entrega ent on ent.fk_cliente_id = cnt.id
 ![image](https://user-images.githubusercontent.com/75951646/205530017-d6b81c76-7460-4c65-a73d-beb1485ddd68.png)
 
 
@@ -311,27 +310,27 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
     -- Ordenar por nome da linha a id do ônibus e quantidade de assentos
      select l.nome as nome_linha, a.fk_onibus_id as id_onibus, o.qntd_assentos as assentos from linha l 
-     join alocado a on (l.id = a.fk_linha_id)
+     inner join alocado a on (l.id = a.fk_linha_id)
      join onibus o on (o.id = a.fk_onibus_id)
      order by nome; 
 ![image](https://user-images.githubusercontent.com/75951646/205530577-b48fcbf5-2660-44ec-94ac-34c33d6efbd2.png)
      
     -- Ordenar as linhas por ordem de passagem
     select p.ordem, p.fk_linha_id as id_linha, l.nome  from percorre p 
-    join linha l on (p.fk_linha_id = l.id)
+    inner join linha l on (p.fk_linha_id = l.id)
     order by ordem;
 ![image](https://user-images.githubusercontent.com/75951646/205531601-732a0507-d6a1-4305-8824-f1ff3306fbaf.png)
 
     --- Ordenar por id do cliente as horas de recebimento e entrega
     select e.fk_cliente_id as cliente, e.datahora as hora_entrega, r.datahora as hora_recebe from entrega e
-    join recebe r on (r.fk_cliente_id = e.fk_cliente_id)
+    inner join recebe r on (r.fk_cliente_id = e.fk_cliente_id)
     order by e.fk_cliente_id;
 
  ![image](https://user-images.githubusercontent.com/75951646/205532253-1074b80f-09e0-4310-b20c-52abf02931bc.png)
       
       --- Ordenar por id do cliente as horas de chegada e saída do cliente no ponto
        select c.fk_cliente_id as cliente, c.datahora_chegada as hora_chegada, d.datahora_deixa as hora_saida from chega c
-       join deixa d on (c.fk_cliente_id = d.fk_cliente_id)
+       inner join deixa d on (c.fk_cliente_id = d.fk_cliente_id)
        order by d.fk_cliente_id;
  
  ![image](https://user-images.githubusercontent.com/75951646/205532545-12f80f83-521a-44f2-8d95-8e516ccfca43.png)
@@ -373,15 +372,15 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 **a) Criar minimo 2 envolvendo algum tipo de junção**
 
-    select id as id_bus, placa from onibus inner join alocado
-    on (onibus.id = alocado.fk_onibus_id)
-    group by id;
+     select id as id_bus, placa from onibus inner join alocado
+     on (onibus.id = alocado.fk_onibus_id)
+     group by id;
 ![image](https://user-images.githubusercontent.com/75951646/205533456-5895894c-9516-4557-bd0b-f5541a0b32d0.png)
 
-    select bairro from endereco inner join ponto_de_onibus 
-    on (endereco.id = ponto_de_onibus.fk_endereco_id)
-    where logradouro = 'Rua'
-    group by bairro ;
+     select bairro from endereco inner join ponto_de_onibus 
+     on (endereco.id = ponto_de_onibus.fk_endereco_id)
+     where logradouro = 'Rua'
+     group by bairro ;
 
  ![image](https://user-images.githubusercontent.com/75951646/205533542-0800f6fc-237b-4f57-9344-c697a1a8edc6.png)
 
