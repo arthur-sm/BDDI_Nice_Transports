@@ -154,37 +154,47 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
     
     -- seleciona linhas inativas
     select * from percorre where ativo = false;
+![image](https://user-images.githubusercontent.com/75951646/205525698-346a6df4-d9aa-4799-9e83-8c1110507e02.png)
     
     -- seleciona pontos de ônibus com menos assentos
     select * from ponto_de_onibus where qntd_assentos < 12;
- 
+![image](https://user-images.githubusercontent.com/75951646/205525743-b5fc2d05-f173-4228-961e-2a64c0b54dd1.png)
+
 
 #### 9.3	CONSULTAS QUE USAM OPERADORES LÓGICOS, ARITMÉTICOS E TABELAS OU CAMPOS RENOMEADOS (Mínimo 11)
 **a) Criar 5 consultas que envolvam os operadores lógicos AND, OR e Not**
 
     select * from endereco where cidade = 'Vitória' and tipo_via_urbana = 'Rua';
-    
+![image](https://user-images.githubusercontent.com/75951646/205525846-0c8de6b9-620e-4c22-acbb-eb81b1e34427.png)
+
     select * from onibus where qntd_assentos > 40 or data_compra = '2015-07-09'; 
+![image](https://user-images.githubusercontent.com/75951646/205525887-81386668-ec4c-4a5c-b8b1-3e67c6255861.png)
     
     select * from ponto_de_onibus where numero > 20 and qntd_assentos > 10;
-    
+![image](https://user-images.githubusercontent.com/75951646/205525936-fdd070e9-5f62-49fd-9e6b-9e23d9168bbc.png)
+
     select * from percorre where not ativo = false;
-    
+![image](https://user-images.githubusercontent.com/75951646/205526001-34d7c6b1-c9c8-43e0-b417-69852653d101.png)
+   
     select * from endereco where not tipo_via_urbana = 'Rua';
+![image](https://user-images.githubusercontent.com/75951646/205526028-6be91f43-a269-437d-a614-636087aca044.png)
 
 **b) Criar no mínimo 3 consultas com operadores aritméticos**
 
     --Ônibus próximos de precisarem serem aposentados (15 anos de serviço)
     SELECT id, placa, data_compra FROM onibus
     where data_compra < now() - INTERVAL '14 year';
+![image](https://user-images.githubusercontent.com/75951646/205526049-0af1e289-22cc-4063-ac82-6b75f3bb04b7.png)
     
     --Capacidade máxima de cada ônibus (pessoas em pé + sentadas)
     SELECT id, placa, (qntd_assentos + 16) capacidade_maxima FROM Onibus
+![image](https://user-images.githubusercontent.com/75951646/205526081-11061a2d-b309-4eaf-8de9-0dbc5875b976.png)
     
     --Tempo médio de espera por dia
     SELECT to_char(c.datahora, 'dd-MM-yyyy'), avg(d.datahora - c.datahora) from chega c
     join deixa d on d.fk_cliente_id = c.fk_cliente_id
     group by to_char(c.datahora, 'dd-MM-yyyy'), to_char(d.datahora, 'dd-MM-yyyy')
+![image](https://user-images.githubusercontent.com/75951646/205526172-37a21f73-9b02-4082-9ed1-fb29a6b3bb32.png)
 
 **c) Criar no mínimo 3 consultas com operação de renomear nomes de campos ou tabelas**
 
