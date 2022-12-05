@@ -292,18 +292,19 @@ O sistema proposto tem com foco fornecer  informações relacionadas à quantida
 
 #### 9.6	CONSULTAS COM INNER JOIN E ORDER BY (Mínimo 6)<br>
 **a) Uma junção que envolva todas as tabelas possuindo no mínimo 2 registros no resultado**
-       select * FROM Onibus onb
-       inner join Alocado alc on alc.fk_onibus_id = onb.id
-       inner join Linha lin on lin.id = alc.fk_linha_id
-       inner join Percorre per on per.fk_linha_id = lin.id
-       inner join ponto_de_onibus pdo on pdo.id = per.fk_ponto_de_onibus_id
-       inner join passa pss on pss.fk_ponto_de_onibus_id = pdo.id
-       inner join endereco edr on edr.id = pdo.id
-       inner join chega cga on cga.fk_ponto_de_onibus_id = pdo.id
-       inner join deixa dxa on dxa.fk_ponto_de_onibus_id = cga.fk_ponto_de_onibus_id
-       inner join cliente cnt on cnt.id = dxa.fk_cliente_id
-       inner join recebe rcb on rcb.fk_cliente_id = cnt.id
-       inner join entrega ent on ent.fk_cliente_id = cnt.id
+                  
+         select * FROM Onibus onb
+         inner join Alocado alc on alc.fk_onibus_id = onb.id
+         inner join Linha lin on lin.id = alc.fk_linha_id
+         inner join Percorre per on per.fk_linha_id = lin.id
+         inner join ponto_de_onibus pdo on pdo.id = per.fk_ponto_de_onibus_id
+         inner join passa pss on pss.fk_ponto_de_onibus_id = pdo.id
+         inner join endereco edr on edr.id = pdo.id
+         inner join chega cga on cga.fk_ponto_de_onibus_id = pdo.id
+         inner join deixa dxa on dxa.fk_ponto_de_onibus_id = cga.fk_ponto_de_onibus_id
+         inner join cliente cnt on cnt.id = dxa.fk_cliente_id
+         inner join recebe rcb on rcb.fk_cliente_id = cnt.id
+         inner join entrega ent on ent.fk_cliente_id = cnt.id
 ![image](https://user-images.githubusercontent.com/75951646/205530017-d6b81c76-7460-4c65-a73d-beb1485ddd68.png)
 
 
